@@ -2,8 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
-
-import postRoutes from './routes/posts.js';
+import router from './src/routes/router.js';
 
 // Setup enviroment variables from '.env' file so they can be used like this 'process.env'
 dotenv.config();
@@ -11,10 +10,11 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Define all of the routes for our application
-app.use('/posts', postRoutes);
-
+app.use(express.json());
 app.use(cors());
+
+// Define all of the routes for our application
+app.use('/', router);
 
 // Connect to the database
 mongoose.connect(process.env.MONGODB_CONNECTION_URL)
