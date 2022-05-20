@@ -3,11 +3,16 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
+import postRoutes from './routes/posts.js';
+
 // Setup enviroment variables from '.env' file so they can be used like this 'process.env'
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// Define all of the routes for our application
+app.use('/posts', postRoutes);
 
 app.use(cors());
 
