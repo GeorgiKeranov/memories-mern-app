@@ -1,8 +1,10 @@
 import { Router } from 'express';
-import { getPosts } from '../controllers/posts.js';
+import { getPosts, savePost } from '../controllers/posts.js';
 
 const router = Router();
 
 router.get('/', getPosts);
+
+router.post('/', savePost);
 
 export default router;
