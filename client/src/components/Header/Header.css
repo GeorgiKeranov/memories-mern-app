@@ -1,0 +1,9 @@
+.header {
+    padding: 20px 0;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 25%);
+}
+
+.header h2 {
+    margin: 0;
+    font-size: 35px;
+}
