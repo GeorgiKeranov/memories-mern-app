@@ -2,7 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import router from './src/routes/router.js';
+import router from './routes/router.js';
 
 // Setup enviroment variables from '.env' file so they can be used like this 'process.env'
 dotenv.config();
