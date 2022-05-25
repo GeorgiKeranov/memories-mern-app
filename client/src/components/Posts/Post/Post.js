@@ -1,5 +1,5 @@
-export default function Post() {
+export default function Post(props) {
   return (
-    <div>Post</div>
+    <div>{props.title}</div>
   )
 }
