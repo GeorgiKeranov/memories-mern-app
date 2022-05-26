@@ -15,9 +15,9 @@ export const savePost = async (req, res) => {
 
     try {
         const post = new Post(body);
-        await post.save();
+        const postSaved = await post.save();
 
-        res.status(200).send({message: 'The post is saved successfully!'});
+        res.status(200).send(postSaved);
     } catch (error) {
         res.status(400).send({error: error.message});
     }
