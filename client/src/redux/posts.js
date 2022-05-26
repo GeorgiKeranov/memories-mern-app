@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchPosts } from '../api/posts';
+import { fetchPosts, createPost } from '../api/posts';
 
 export const getPosts = createAsyncThunk('posts/getPosts', fetchPosts);
+export const savePost = createAsyncThunk('posts/savePost', createPost);
 
 const postsSlice = createSlice({
   name: 'posts',
@@ -21,6 +22,9 @@ const postsSlice = createSlice({
     [getPosts.rejected]: (state) => {
       state.isLoading = false;
     },
+    [savePost.fulfilled]: (state, action) => {
+      state.value.push(action.payload);
+    }
   }
 });
 
