@@ -2,7 +2,7 @@ export default function Post(props) {
   const post = props.post;
 
   const postIntroStyle = {
-    backgroundStyle: `url(${post.image})`
+    backgroundImage: `url(${post.image})`
   };
 
   let timeDifference = (new Date() - new Date(post.createdAt)) / 1000 / 60;
@@ -20,7 +20,7 @@ export default function Post(props) {
   return (
     <div className="post">
       <div className="post__intro" style={postIntroStyle}>
-        <h4>{post.author}</h4>
+        <h4>{post.creator}</h4>
 
         <p>{timeDifferenceString}</p>
       </div>
