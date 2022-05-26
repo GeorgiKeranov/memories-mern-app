@@ -13,7 +13,7 @@ export default function Posts() {
   }, [dispatch]);
   
   const postElements = posts.map(post => {
-    return <Post key={post._id} title={post.title} />
+    return <Post key={post._id} post={post} />
   });
 
   return (
