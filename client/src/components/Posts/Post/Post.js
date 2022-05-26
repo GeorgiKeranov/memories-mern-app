@@ -5,7 +5,6 @@ export default function Post(props) {
     backgroundStyle: `url(${post.image})`
   };
 
-
   let timeDifference = (new Date() - new Date(post.createdAt)) / 1000 / 60;
   let timeDifferenceString = `${Math.round(timeDifference)} minutes ago`;
   if (timeDifference >= 60) {
