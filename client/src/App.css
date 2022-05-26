@@ -20,16 +20,3 @@ h1, h2, h3, h4, h5, h6, p {
   margin: 0 auto;
   padding: 0 20px;
 }
-
-.app .app__columns {
-  display: flex;
-  justify-content: space-between;
-}
-
-.app .app__main {
-  flex: 1 1 80%;
-}
-
-.app .app__sidebar {
-  flex: 1 1 20%;
-}

@@ -1,0 +1,16 @@
+.main {
+  padding: 30px 0;
+}
+
+.main .main__columns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.main .main__content {
+  flex: 1 1 80%;
+}
+
+.main .main__sidebar {
+  flex: 1 1 20%;
+}
