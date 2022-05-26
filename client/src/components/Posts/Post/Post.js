@@ -5,12 +5,25 @@ export default function Post(props) {
     backgroundStyle: `url(${post.image})`
   };
 
+
+  let timeDifference = (new Date() - new Date(post.createdAt)) / 1000 / 60;
+  let timeDifferenceString = `${Math.round(timeDifference)} minutes ago`;
+  if (timeDifference >= 60) {
+    timeDifference /= 60;
+    timeDifferenceString = `${Math.round(timeDifference)} hours ago`;
+
+    if (timeDifference >= 24) {
+      timeDifference /= 24;
+      timeDifferenceString = `${Math.round(timeDifference)} days ago`;
+    }
+  }
+
   return (
     <div className="post">
       <div className="post__intro" style={postIntroStyle}>
         <h4>{post.author}</h4>
 
-        <p>{post.createdAt}</p>
+        <p>{timeDifferenceString}</p>
       </div>
 
       <div className="post__details">
