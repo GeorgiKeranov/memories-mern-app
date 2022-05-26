@@ -5,6 +5,7 @@
 body, html {
   margin: 0;
   padding: 0;
+  font-size: 16px;
 }
 
 body {
@@ -13,6 +14,60 @@ body {
 
 h1, h2, h3, h4, h5, h6, p {
   margin: 0 0 20px;
+}
+
+h2 {
+  font-size: 27px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+}
+
+textarea {
+  resize: none;
+}
+
+input:focus-visible, textarea:focus-visible {
+  outline: none;
+}
+
+button {
+  background-color: #000;
+  border: 2px solid #000;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .3s;
+}
+
+button:hover {
+  color: #000;
+  background-color: #fff;
+}
+
+.btn {
+  background-color: #3e50b5;
+  border-color: #3e50b5;
+}
+
+.btn:hover {
+  color: #3e50b5;
+}
+
+.btn-cancel {
+  background-color: #f70057;
+  border-color: #f70057;
+}
+
+.btn-cancel:hover {
+  color: #f70057;
 }
 
 .container {

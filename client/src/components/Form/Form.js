@@ -1,3 +1,5 @@
+import './Form.css';
+
 export default function Form() {
   return (
     <div className="form-create-memory">
@@ -14,10 +16,10 @@ export default function Form() {
 
         <input type="file" name="image" />
 
-        <input type="submit" value="Submit"/>
+        <button className="btn">Post</button>
       </form>
 
-      <button>Clear</button>
+      <button className="btn-cancel">Clear</button>
     </div>
   )
 }

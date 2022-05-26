@@ -8,9 +8,9 @@
 }
 
 .main .main__content {
-  flex: 1 1 80%;
+  flex: 1 1 70%;
 }
 
 .main .main__sidebar {
-  flex: 1 1 20%;
+  flex: 1 1 30%;
 }
