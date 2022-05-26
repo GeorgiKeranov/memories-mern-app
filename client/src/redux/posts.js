@@ -1,21 +1,27 @@
-import { createSlice } from '@reduxjs/toolkit';
-// import { fetchPosts } from '../api/posts';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { fetchPosts } from '../api/posts';
+
+export const getPosts = createAsyncThunk('posts/getPosts', fetchPosts);
 
 const postsSlice = createSlice({
   name: 'posts',
   initialState: {
-    value: []
+    value: [],
+    isLoading: true
   },
-  reducers: {
-    getPosts: (state, action) => {
-      state.value = [
-        { _id: 1, title: 'test 1 '},
-        { _id: 2, title: 'test 2 '}
-      ];
-    }
+  reducers: {},
+  extraReducers: {
+    [getPosts.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getPosts.fulfilled]: (state, action) => {
+      state.value = action.payload
+      state.isLoading = false
+    },
+    [getPosts.rejected]: (state) => {
+      state.isLoading = false;
+    },
   }
 });
-
-export const { getPosts } = postsSlice.actions;
 
 export default postsSlice.reducer;

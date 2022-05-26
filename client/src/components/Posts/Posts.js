@@ -2,9 +2,10 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPosts } from '../../redux/posts';
 import Post from './Post/Post';
+import Loader from '../Loader/Loader';
 
 export default function Posts() {
-  const posts = useSelector(state => state.posts.value);
+  const [posts, isLoading] = useSelector(state => [state.posts.value, state.posts.isLoading]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,6 +19,8 @@ export default function Posts() {
   return (
     <section className="posts">
       <h2>Posts</h2>
+
+      {isLoading && <Loader />}
 
       {postElements}
     </section>
