@@ -1,0 +1,60 @@
+.post {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 25%);
+  margin-bottom: 30px;
+}
+
+.post .post__intro {
+  position: relative;
+  padding-bottom: 56%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.post .post__intro:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 40%);
+}
+
+.post .post__heading {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  color: #fff;
+}
+
+.post .post__heading h4 {
+  font-size: 19px;
+  font-weight: 400;
+  margin-bottom: 5px;
+}
+
+.post .post__heading p {
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.post .post__details {
+  padding: 15px;
+}
+
+.post .post__tags {
+  color: #989898;
+}
+
+.post .post__like {
+  display: flex;
+}
+
+.post .post__likes-count {
+  margin: 4px 10px 0 0;
+}

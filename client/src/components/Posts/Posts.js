@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPosts } from '../../redux/posts';
+import './Posts.css';
 import Post from './Post/Post';
 import Loader from '../Loader/Loader';
 
@@ -18,8 +19,6 @@ export default function Posts() {
 
   return (
     <section className="posts">
-      <h2>Posts</h2>
-
       {isLoading && <Loader />}
 
       {postElements}

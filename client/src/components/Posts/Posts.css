@@ -1,0 +1,9 @@
+.posts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3.5%;
+}
+
+.posts .post {
+  flex: 0 1 31%;
+}

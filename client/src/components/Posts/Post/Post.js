@@ -1,3 +1,5 @@
+import './Post.css';
+
 export default function Post(props) {
   const post = props.post;
 
@@ -6,23 +8,27 @@ export default function Post(props) {
   };
 
   let timeDifference = (new Date() - new Date(post.createdAt)) / 1000 / 60;
-  let timeDifferenceString = `${Math.round(timeDifference)} minutes ago`;
+  let timeDifferenceString = 'minute';
   if (timeDifference >= 60) {
     timeDifference /= 60;
-    timeDifferenceString = `${Math.round(timeDifference)} hours ago`;
+    timeDifferenceString = 'hour';
 
     if (timeDifference >= 24) {
       timeDifference /= 24;
-      timeDifferenceString = `${Math.round(timeDifference)} days ago`;
+      timeDifferenceString = 'day';
     }
   }
+
+  timeDifference = Math.round(timeDifference);
 
   return (
     <div className="post">
       <div className="post__intro" style={postIntroStyle}>
-        <h4>{post.creator}</h4>
+        <div className="post__heading">
+          <h4>{post.creator}</h4>
 
-        <p>{timeDifferenceString}</p>
+          <p>{timeDifference} {timeDifferenceString}{timeDifference > 1 ? 's' : ''} ago</p>
+        </div>
       </div>
 
       <div className="post__details">
@@ -31,13 +37,13 @@ export default function Post(props) {
         <h3>{post.title}</h3>
 
         <p>{post.message}</p>
-      </div>
 
-      <div className="post__actions">
-        <div className="post__like">
-          <button className="btn-like">Like</button>
+        <div className="post__actions">
+          <div className="post__like">
+            <p className="post__likes-count">{post.likeCount} LIKE{post.likeCount === 1 ? '' : 'S'}</p>
 
-          <p className="post__likes-count">{post.likeCount} LIKE{post.likeCount > 1 ? 'S' : ''}</p>
+            <button className="btn-like">Like</button>
+          </div>
         </div>
       </div>
     </div>
