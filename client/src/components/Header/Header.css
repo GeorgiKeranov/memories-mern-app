@@ -11,3 +11,10 @@
     font-size: 35px;
     color: #3e50b5;
 }
+
+@media (max-width: 540px) {
+    .header h2 {
+        font-size: 28px;
+        line-height: 1.4;
+    }
+}

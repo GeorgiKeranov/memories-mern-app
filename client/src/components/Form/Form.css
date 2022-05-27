@@ -17,3 +17,10 @@
 .form-create-memory .btn {
   margin-bottom: 10px;
 }
+
+@media (max-width: 900px) {
+  .form-create-memory {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}

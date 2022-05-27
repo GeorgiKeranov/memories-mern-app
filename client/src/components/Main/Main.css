@@ -14,3 +14,29 @@
 .main .main__sidebar {
   flex: 0 1 28%;
 }
+
+@media (max-width: 1200px) {
+  .main .main__content {
+    flex-basis: 60%;
+  }
+
+  .main .main__sidebar {
+    flex-basis: 37%;
+  }
+}
+
+@media (max-width: 900px) {
+  .main .main__columns {
+    flex-wrap: wrap;
+  }
+
+  .main .main__content,
+  .main .main__sidebar {
+    flex-basis: 100%;
+  }
+
+  .main .main__sidebar {
+    order: -1;
+    margin-bottom: 50px;
+  }
+}
