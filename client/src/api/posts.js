@@ -41,3 +41,15 @@ export const updatePost = async ({id, data}) => {
     return { error: error.message };
   }
 }
+
+export const removePost = async (postId) => {
+  try {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}posts/${postId}`, {
+      method: 'DELETE'
+    });
+    
+    return await response.json();
+  } catch (error) {
+    return { error: error.message };
+  }
+}

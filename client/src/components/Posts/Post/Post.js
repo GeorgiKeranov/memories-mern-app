@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { setPostToEdit } from '../../../redux/posts';
+import { setPostToEdit, removePost } from '../../../redux/posts';
 import './Post.css';
 
 export default function Post(props) {
@@ -26,6 +26,10 @@ export default function Post(props) {
 
   function editPost() {
     dispatch(setPostToEdit(post));
+  }
+
+  function handlePostRemove() {
+    dispatch(removePost(post._id));
   }
 
   return (
@@ -57,7 +61,7 @@ export default function Post(props) {
           </div>
 
           <div className="post__remove">
-            <button className="btn-action btn-action--remove">REMOVE</button>
+            <button className="btn-action btn-action--remove" onClick={handlePostRemove}>REMOVE</button>
           </div>
         </div>
       </div>

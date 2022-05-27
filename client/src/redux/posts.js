@@ -3,7 +3,8 @@ import * as postsApi from '../api/posts';
 
 export const getPosts = createAsyncThunk('posts/getPosts', postsApi.getPosts);
 export const savePost = createAsyncThunk('posts/savePost', postsApi.savePost);
-export const updatePost = createAsyncThunk('posts/savePost', postsApi.updatePost);
+export const updatePost = createAsyncThunk('posts/updatePost', postsApi.updatePost);
+export const removePost = createAsyncThunk('posts/removePost', postsApi.removePost);
 
 const postsSlice = createSlice({
   name: 'posts',
@@ -46,6 +47,15 @@ const postsSlice = createSlice({
         return post;
       });
     },
+    [removePost.fulfilled]: (state, action) => {
+      const response = action.payload;
+      
+      if (response.error) {
+        return console.log(response);
+      }
+
+      state.value = state.value.filter(post => post._id !== response._id);
+    }
   }
 });
 
