@@ -52,10 +52,16 @@
   color: #989898;
 }
 
+.post .post__actions {
+  display: flex;
+  justify-content: space-between;
+}
+
 .post .post__like {
   display: flex;
 }
 
 .post .post__likes-count {
-  margin: 4px 10px 0 0;
+  margin: 1px 9px 0 0;
+  color: #647dc8;
 }

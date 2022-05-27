@@ -44,6 +44,10 @@ export default function Post(props) {
 
             <button className="btn-like">Like</button>
           </div>
+
+          <div className="post__remove">
+            <button className="btn-remove">REMOVE</button>
+          </div>
         </div>
       </div>
     </div>
