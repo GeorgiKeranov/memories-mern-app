@@ -28,13 +28,13 @@ export const updatePost = async (req, res) => {
     const postData = req.body;
 
     try {
-        const post = await Post.findByIdAndUpdate(postId, postData);
+        const post = await Post.findByIdAndUpdate(postId, postData, {returnDocument: 'after'});
         
         if (!post) {
             return res.status(400).send({error: 'The post is not existing!'});
         }
 
-        res.status(200).send({message: 'The post is updated successfully!'});
+        res.status(200).send(post);
     } catch (error) {
         res.status(400).send({error: error.message});
     }
