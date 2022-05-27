@@ -6,8 +6,15 @@
     background-color: #fff;
 }
 
+.header .header__columns {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .header h2 {
-    margin: 0;
+    margin: 3px 0 0;
+    line-height: 1;
     font-size: 35px;
     color: #3e50b5;
 }

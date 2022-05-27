@@ -54,6 +54,39 @@ button:hover {
   background-color: #fff;
 }
 
+nav ul {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  gap: 20px;
+  list-style-type: none;
+}
+
+nav ul a {
+  position: relative;
+  text-decoration: none;
+  color: #3e50b5;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+nav ul a:before {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 0;
+  height: 2px;
+  background-color: #3e50b5;
+  transition: .3s;
+}
+
+nav ul a:hover:before {
+  width: 100%;
+}
+
 .btn {
   background-color: #3e50b5;
   border-color: #3e50b5;
