@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 export default function Header() {
@@ -6,6 +7,16 @@ export default function Header() {
       <div className="container">
         <div className="header__title">
           <h2>MEMORIES</h2>
+        </div>
+
+        <div className="header__navigation">
+          <nav>
+            <ul>
+              <Link to="/">Home</Link>
+
+              <Link to="/register">Register</Link>
+            </ul>
+          </nav>
         </div>
       </div>
     </header>
