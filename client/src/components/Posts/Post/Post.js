@@ -29,6 +29,10 @@ export default function Post(props) {
 
           <p>{timeDifference} {timeDifferenceString}{timeDifference > 1 ? 's' : ''} ago</p>
         </div>
+
+        <div className="post__edit">
+          <button className="btn-action btn-action--edit">EDIT</button>
+        </div>
       </div>
 
       <div className="post__details">
@@ -46,7 +50,7 @@ export default function Post(props) {
           </div>
 
           <div className="post__remove">
-            <button className="btn-remove">REMOVE</button>
+            <button className="btn-action btn-action--remove">REMOVE</button>
           </div>
         </div>
       </div>

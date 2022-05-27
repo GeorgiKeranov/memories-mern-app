@@ -89,7 +89,7 @@ button:hover {
   background-image: url(/public/like-filled.png);
 }
 
-.btn-remove {
+.btn-action {
   display: flex;
   align-items: center;
   background: transparent;
@@ -100,21 +100,40 @@ button:hover {
   font-size: 16px;
 }
 
-.btn-remove:before {
+.btn-action:before {
   content: '';
   display: inline-block;
-  width: 17px;
-  height: 18px;
   background-color: transparent;
-  background-image: url(/public/trash.png);
   background-size: contain;
   background-repeat: no-repeat;
   margin-right: 7px;
 }
 
-.btn-remove:hover {
+.btn-action:hover {
   color: #647dc8;
+  background: transparent;
   opacity: .5;
+}
+
+.btn-action--remove:before {
+  width: 17px;
+  height: 18px;
+  background-image: url(/public/trash.png);
+}
+
+.btn-action--edit {
+  color: #fff;
+}
+
+.btn-action--edit:before {
+  width: 17px;
+  height: 18px;
+  background-image: url(/public/edit.png);
+  margin-top: 3px;
+}
+
+.btn-action--edit:hover {
+  color: #fff;
 }
 
 .container {

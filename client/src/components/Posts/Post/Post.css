@@ -12,6 +12,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  color: #fff;
 }
 
 .post .post__intro:before {
@@ -29,8 +30,7 @@
   position: absolute;
   top: 15px;
   left: 15px;
-  right: 15px;
-  color: #fff;
+  right: 45px;
 }
 
 .post .post__heading h4 {
@@ -42,6 +42,12 @@
 .post .post__heading p {
   font-size: 14px;
   font-weight: 300;
+}
+
+.post .post__edit {
+  position: absolute;
+  top: 15px;
+  right: 15px;
 }
 
 .post .post__details {
