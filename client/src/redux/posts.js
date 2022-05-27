@@ -32,7 +32,19 @@ const postsSlice = createSlice({
       state.value.push(action.payload);
     },
     [updatePost.fulfilled]: (state, action) => {
-      state.isLoading = false;
+      const response = action.payload;
+
+      if (response.error) {
+        return console.log(response);
+      }
+
+      state.value = state.value.map(post => {
+        if (post._id === response._id) {
+          return response;
+        }
+
+        return post;
+      });
     },
   }
 });
