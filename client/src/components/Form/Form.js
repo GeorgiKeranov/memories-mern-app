@@ -1,17 +1,19 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './Form.css';
-import { savePost, updatePost } from '../../redux/posts';
+import { savePost, updatePost, setPostToEdit } from '../../redux/posts';
 
 export default function Form() {
   const dispatch = useDispatch();
 
-  const [formData, setFormData] = useState({
+  const formDataInitialState = {
     creator: '',
     title: '',
     message: '',
     tags: '',
-  });
+  };
+
+  const [formData, setFormData] = useState(formDataInitialState);
 
   const postToEdit = useSelector(state => state.posts.postToEdit);
   const actionName = postToEdit ? 'Edit' : 'Post';
@@ -63,6 +65,12 @@ export default function Form() {
     });
   }
 
+  function cancelEdit() {
+    dispatch(setPostToEdit(null));
+
+    setFormData(formDataInitialState);
+  }
+
   return (
     <div className="form-create-memory">
       <h2>{actionName} a Memory</h2>
@@ -81,7 +89,7 @@ export default function Form() {
         <button className="btn" onClick={handleSubmit}>{actionName}</button>
       </form>
 
-      <button className="btn-cancel">Clear</button>
+      {postToEdit && <button className="btn-cancel" onClick={cancelEdit}>Cancel Edit</button>}
     </div>
   )
 }
