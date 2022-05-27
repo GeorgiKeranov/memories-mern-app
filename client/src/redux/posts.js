@@ -20,6 +20,7 @@ const postsSlice = createSlice({
   },
   extraReducers: {
     [getPosts.pending]: (state) => {
+      state.value = [];
       state.isLoading = true;
     },
     [getPosts.fulfilled]: (state, action) => {
