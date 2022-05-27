@@ -1,6 +1,9 @@
+import { useDispatch } from 'react-redux';
+import { setPostToEdit } from '../../../redux/posts';
 import './Post.css';
 
 export default function Post(props) {
+  const dispatch = useDispatch();
   const post = props.post;
 
   const postIntroStyle = {
@@ -21,6 +24,10 @@ export default function Post(props) {
 
   timeDifference = Math.round(timeDifference);
 
+  function editPost() {
+    dispatch(setPostToEdit(post));
+  }
+
   return (
     <div className="post">
       <div className="post__intro" style={postIntroStyle}>
@@ -31,7 +38,7 @@ export default function Post(props) {
         </div>
 
         <div className="post__edit">
-          <button className="btn-action btn-action--edit">EDIT</button>
+          <button className="btn-action btn-action--edit" onClick={editPost}>EDIT</button>
         </div>
       </div>
 

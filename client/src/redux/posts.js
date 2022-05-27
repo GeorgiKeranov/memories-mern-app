@@ -1,16 +1,22 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchPosts, createPost } from '../api/posts';
+import * as postsApi from '../api/posts';
 
-export const getPosts = createAsyncThunk('posts/getPosts', fetchPosts);
-export const savePost = createAsyncThunk('posts/savePost', createPost);
+export const getPosts = createAsyncThunk('posts/getPosts', postsApi.getPosts);
+export const savePost = createAsyncThunk('posts/savePost', postsApi.savePost);
+export const updatePost = createAsyncThunk('posts/savePost', postsApi.updatePost);
 
 const postsSlice = createSlice({
   name: 'posts',
   initialState: {
     value: [],
-    isLoading: true
+    isLoading: true,
+    postToEdit: null
   },
-  reducers: {},
+  reducers: {
+    setPostToEdit: (state, action) => {
+      state.postToEdit = action.payload;
+    }
+  },
   extraReducers: {
     [getPosts.pending]: (state) => {
       state.isLoading = true;
@@ -24,8 +30,19 @@ const postsSlice = createSlice({
     },
     [savePost.fulfilled]: (state, action) => {
       state.value.push(action.payload);
+    },
+    [updatePost.pending]: (state, action) => {
+      state.isLoading = true;
+    },
+    [updatePost.fulfilled]: (state, action) => {
+      state.isLoading = false;
+    },
+    [updatePost.rejected]: (state, action) => {
+      state.isLoading = false;
     }
   }
 });
+
+export const { setPostToEdit } = postsSlice.actions;
 
 export default postsSlice.reducer;
