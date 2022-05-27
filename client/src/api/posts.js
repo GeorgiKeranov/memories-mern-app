@@ -26,14 +26,14 @@ export const savePost = async (postData) => {
   }
 }
 
-export const updatePost = async (postId, postData) => {
+export const updatePost = async ({id, data}) => {
   try {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}posts/${postId}`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}posts/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(postData)
+      body: JSON.stringify(data)
     });
     
     return await response.json();

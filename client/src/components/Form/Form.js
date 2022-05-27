@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './Form.css';
-import { savePost } from '../../redux/posts';
+import { savePost, updatePost } from '../../redux/posts';
 
 export default function Form() {
   const dispatch = useDispatch();
@@ -46,6 +46,10 @@ export default function Form() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+
+    if (postToEdit) {
+      return dispatch(updatePost({id: postToEdit._id, data: formData}));
+    }
 
     dispatch(savePost(formData));
   }

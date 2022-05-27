@@ -31,15 +31,9 @@ const postsSlice = createSlice({
     [savePost.fulfilled]: (state, action) => {
       state.value.push(action.payload);
     },
-    [updatePost.pending]: (state, action) => {
-      state.isLoading = true;
-    },
     [updatePost.fulfilled]: (state, action) => {
       state.isLoading = false;
     },
-    [updatePost.rejected]: (state, action) => {
-      state.isLoading = false;
-    }
   }
 });
 
