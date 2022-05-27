@@ -10,6 +10,7 @@ body, html {
 
 body {
   font-family: 'Heebo', sans-serif;
+  background-color: #edf0f3;
 }
 
 h1, h2, h3, h4, h5, h6, p {
@@ -86,7 +87,7 @@ button:hover {
 }
 
 .container {
-  max-width: 1240px;
+  max-width: 1540px;
   margin: 0 auto;
   padding: 0 20px;
 }
