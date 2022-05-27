@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
-import router from './routes/router.js';
+import router from './routers/router.js';
 
 // Setup enviroment variables from '.env' file so they can be used like this 'process.env'
 dotenv.config();
