@@ -27,8 +27,8 @@ export default function Form() {
   async function handleChange(event) {
     const element = event.target;
     const name = element.name;
-
     let value = element.value
+
     // Get base64 encoding if the element is image
     if (name === 'image') {
       try {
@@ -36,6 +36,10 @@ export default function Form() {
       } catch (error) {
         return console.log(error);
       }
+    }
+
+    if (name === 'tags') {
+      value = value.split(',');
     }
 
     setFormData(prevFormData => {
