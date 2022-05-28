@@ -76,7 +76,7 @@ export default function Form() {
   }
 
   return (
-    <div className="form-create-memory">
+    <div className="form form--create-memory">
       <h2>{actionName} a Memory</h2>
 
       <form>

@@ -63,14 +63,22 @@ nav ul {
 }
 
 nav ul a {
-  position: relative;
-  text-decoration: none;
-  color: #3e50b5;
   font-size: 20px;
   font-weight: 700;
 }
 
 nav ul a:before {
+  height: 2px;
+}
+
+a {
+  position: relative;
+  color: #3e50b5;
+  transition: .3s;
+  text-decoration: none;
+}
+
+a:before {
   content: '';
   display: block;
   position: absolute;
@@ -78,13 +86,60 @@ nav ul a:before {
   left: 0;
   right: 0;
   width: 0;
-  height: 2px;
+  height: 1px;
   background-color: #3e50b5;
   transition: .3s;
 }
 
-nav ul a:hover:before {
+a:hover:before {
   width: 100%;
+}
+
+.form {
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 25%);
+  border-radius: 10px;
+  text-align: center;
+  background-color: #fff;  
+}
+
+.form h2 {
+  color: #3e50b5;
+}
+
+.form button {
+  width: 100%;
+}
+
+.form .btn {
+  margin-bottom: 10px;
+}
+
+.form .form__two-cols {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form .form__two-cols input {
+  flex: 0 1 48%;
+}
+
+.form .form__right-aligned {
+  text-align: right;
+}
+
+.form--authenticate {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form--authenticate input {
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.form--authenticate .btn {
+  margin-bottom: 20px;
 }
 
 .btn {

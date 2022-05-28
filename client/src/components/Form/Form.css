@@ -1,25 +1,5 @@
-.form-create-memory {
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 25%);
-  border-radius: 10px;
-  text-align: center;
-  background-color: #fff;
-}
-
-.form-create-memory h2 {
-  color: #3e50b5;
-}
-
-.form-create-memory button {
-  width: 100%;
-}
-
-.form-create-memory .btn {
-  margin-bottom: 10px;
-}
-
 @media (max-width: 900px) {
-  .form-create-memory {
+  .form--create-memory {
     max-width: 400px;
     margin: 0 auto;
   }
