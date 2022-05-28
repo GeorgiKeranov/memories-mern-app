@@ -10,12 +10,25 @@ export default function Register() {
     repeatPassword: ''
   });
 
-  function handleChange() {
+  function handleChange(event) {
+    const element = event.target;
 
+    setFormData(prevFormData => {
+      return {
+        ...prevFormData,
+        [element.name]: element.value
+      };
+    });
+  }
+
+  function submitForm(event) {
+    event.preventDefault();
+
+    console.log(formData);
   }
 
   return (
-    <div class='form form--authenticate'>
+    <div className="form form--authenticate">
       <h2>Register</h2>
 
       <form>
@@ -31,7 +44,7 @@ export default function Register() {
         
         <input type="password" name="repeatPassword" placeholder="Repeat Password *" onChange={handleChange} value={formData.repeatPassword}/>
 
-        <button class="btn">Register</button>
+        <button className="btn" onClick={submitForm}>Register</button>
       </form>
 
       <div className="form__right-aligned">
