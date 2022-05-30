@@ -1,11 +1,39 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUser, resetErrorMessage } from '../../redux/auth';
+import Loader from '../Loader/Loader';
 
 export default function Login() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [user, errorMessage, isLoading] = useSelector(state => {
+    return [
+      state.auth.user,
+      state.auth.errorMessage,
+      state.auth.isLoading
+    ];
+  });
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+
+  // When user is authenticated to the redux store redirect to home page
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user, navigate]);
+
+  // On component unmount clear the auth.errorMessage from redux store
+  useEffect(() => {
+    return () => {
+      dispatch(resetErrorMessage());
+    };
+  }, [dispatch]);
 
   function handleChange(event) {
     const element = event.target;
@@ -21,19 +49,25 @@ export default function Login() {
   function submitForm(event) {
     event.preventDefault();
 
-    console.log(formData);
+    dispatch(loginUser(formData));
+  }
+
+  if (isLoading) {
+    return <Loader />
   }
 
   return (
     <div className="form form--authenticate">
       <h2>Login</h2>
 
-      <form>
-        <input type="email" name="email" placeholder="Email Address *" onChange={handleChange} value={formData.email}/>
+      <form onSubmit={submitForm}>
+        <input type="email" name="email" placeholder="Email Address *" required onChange={handleChange} value={formData.email}/>
 
-        <input type="password" name="password" placeholder="Password *" onChange={handleChange} value={formData.password}/>
+        <input type="password" name="password" placeholder="Password *" required onChange={handleChange} value={formData.password}/>
         
-        <button className="btn" onClick={submitForm}>Login</button>
+        {errorMessage && <p className="form__error-message">{errorMessage}</p>}
+
+        <button className="btn" type="submit">Login</button>
       </form>
 
       <div className="form__right-aligned">
