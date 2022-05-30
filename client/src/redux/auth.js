@@ -30,7 +30,8 @@ const authSlice = createSlice({
         return;
       }
 
-      localStorage.setItem('user', response);
+      const user = {...response.user, token: response.token};
+      localStorage.setItem('user', JSON.stringify(user));
       state.user = response;
       state.errorMessage = state.isLoading = false;
     },
