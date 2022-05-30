@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { registerUser } from '../../redux/auth';
+import { registerUser, resetErrorMessage } from '../../redux/auth';
 import Loader from '../Loader/Loader';
 
 export default function Register() {
@@ -17,6 +17,13 @@ export default function Register() {
     password: '',
     repeatPassword: ''
   });
+
+  useEffect(() => {
+    // On component unmount clear the auth.errorMessage from redux store
+    return () => {
+      dispatch(resetErrorMessage());
+    };
+  }, [dispatch]);
 
   useEffect(() => {
     if (errorMessageServer) {
