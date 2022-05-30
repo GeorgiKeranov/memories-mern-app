@@ -50,11 +50,10 @@ userSchema.post('save', (error, doc, next) => {
     }
 });
 
-// Hide password and tokens when returning response with the user information
+// Hide password when returning response with the user information
 userSchema.methods.toJSON = function() {
     let user = this.toObject();
     delete user.password;
-    delete user.tokens;
     
     return user;
 }
