@@ -11,10 +11,13 @@ const authSlice = createSlice({
     isLoading: false
   },
   reducers: {
-    logoutUser: (state) => {
-      state.user = {};
+    logoutUser: state => {
+      state.user = null;
 
       localStorage.removeItem('user');
+    },
+    resetErrorMessage: state => {
+      state.errorMessage = false;
     }
   },
   extraReducers: {
@@ -42,6 +45,6 @@ const authSlice = createSlice({
   }
 });
 
-export const { logoutUser } = authSlice.actions;
+export const { logoutUser, resetErrorMessage } = authSlice.actions;
 
 export default authSlice.reducer;
