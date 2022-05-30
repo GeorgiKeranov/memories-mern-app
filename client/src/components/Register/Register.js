@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { registerUser, resetErrorMessage } from '../../redux/auth';
+import { registerUser, resetErrorMessage, setErrorMessage } from '../../redux/auth';
 import Loader from '../Loader/Loader';
 
 export default function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [user, errorMessageServer, isLoading] = useSelector(state => [state.auth.user, state.auth.errorMessage, state.auth.isLoading]);
-  const [errorMessage, setErrorMessage] = useState(false);
+  const [user, errorMessage, isLoading] = useSelector(state => [state.auth.user, state.auth.errorMessage, state.auth.isLoading]);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -18,22 +17,19 @@ export default function Register() {
     repeatPassword: ''
   });
 
+  // On component unmount clear the auth.errorMessage from redux store
   useEffect(() => {
-    // On component unmount clear the auth.errorMessage from redux store
     return () => {
       dispatch(resetErrorMessage());
     };
   }, [dispatch]);
 
+  // When user is registered and saved in redux store redirect to home page
   useEffect(() => {
-    if (errorMessageServer) {
-      return setErrorMessage(errorMessageServer);
-    }
-
     if (user) {
       navigate('/');
     }
-  }, [user, errorMessageServer, isLoading, dispatch, navigate])
+  }, [user, navigate])
 
   function handleChange(event) {
     const element = event.target;
@@ -59,7 +55,7 @@ export default function Register() {
         }
       });
 
-      return setErrorMessage('Passwords don\'t match!');
+      return dispatch(setErrorMessage('Passwords don\'t match!'));
     }
 
     const formDataNoRepeatPass = {...formData};
