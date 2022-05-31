@@ -17,7 +17,8 @@ export const savePost = async (req, res) => {
     try {
         const post = new Post({...postData, author: authUser._id});
         const postSaved = await post.save();
-
+        await postSaved.populate('author');
+        
         res.status(200).send(postSaved);
     } catch (error) {
         res.status(400).send({error: error.message});
