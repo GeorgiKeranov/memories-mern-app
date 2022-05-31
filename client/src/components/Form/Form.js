@@ -1,101 +1,84 @@
-import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './Form.css';
-import { savePost, updatePost, setPostToEdit } from '../../redux/posts';
+import { savePost, updatePost, setFormData, resetFormData } from '../../redux/posts';
 import Loader from '../Loader/Loader';
+import ImageInput from './ImageInput/ImageInput';
 
 export default function Form() {
   const dispatch = useDispatch();
+  
+  const authUser = useSelector(state => state.auth.user);
+  const [formData, isFormInEditMode, isFormLoading] = useSelector(state => [
+    state.posts.formData,
+    state.posts.isFormInEditMode,
+    state.posts.isFormLoading
+  ]);
 
-  const formDataInitialState = {
-    title: '',
-    message: '',
-    tags: '',
-  };
-
-  const [formData, setFormData] = useState(formDataInitialState);
-
-  const [postToEdit, isFormLoading] = useSelector(state => [state.posts.postToEdit, state.posts.isFormLoading]);
-  const actionName = postToEdit ? 'Edit' : 'Post';
-
-  useEffect(() => {
-    if (postToEdit) {
-      setFormData(postToEdit);
-    }
-  }, [postToEdit]);
-
-  async function handleChange(event) {
+  function handleChange(event) {
     const element = event.target;
     const name = element.name;
-    let value = element.value
+    const value = element.value
 
-    // Get base64 encoding if the element is image
-    if (name === 'image') {
-      try {
-        value = await convertFileToBase64(element.files[0]);
-      } catch (error) {
-        return console.log(error);
-      }
-    }
+    const newFormData = {
+      ...formData,
+      [name]: name === 'tags' ? value.split(',') : value
+    };
 
-    if (name === 'tags') {
-      value = value.split(',');
-    }
-
-    setFormData(prevFormData => {
-      return {
-        ...prevFormData,
-        [name]: value
-      }
-    });
+    dispatch(setFormData(newFormData));
   }
 
-  async function handleSubmit(event) {
+  function setImage(imageBase64) {
+    const newFormData = {
+      ...formData,
+      image: imageBase64
+    };
+    
+    dispatch(setFormData(newFormData));
+  }
+
+  function handleSubmit(event) {
     event.preventDefault();
 
-    if (postToEdit) {
-      return dispatch(updatePost({postId: postToEdit._id, postData: formData}));
+    if (isFormInEditMode) {
+      return dispatch(updatePost({postId: formData._id, postData: formData}));
     }
 
     dispatch(savePost(formData));
   }
 
-  async function convertFileToBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = error => reject(error);
-    });
-  }
-
   function cancelEdit() {
-    dispatch(setPostToEdit(null));
-
-    setFormData(formDataInitialState);
+    dispatch(resetFormData());
   }
 
   if (isFormLoading) {
     return <Loader />;
   }
 
+  const actionName = isFormInEditMode ? 'Edit' : 'Post';
+
   return (
     <div className="form form--create-memory grow-and-fade-in-animation">
-      <h2>{actionName} a Memory</h2>
+      {authUser ?
+          <>
+            <h2>{actionName} a Memory</h2>
 
-      <form>
-        <input type="text" name="title" placeholder="Title" onChange={handleChange} value={formData.title}/>
+            <form>
+              <input type="text" name="title" placeholder="Title" onChange={handleChange} value={formData.title}/>
 
-        <textarea name="message" placeholder="Message" onChange={handleChange} value={formData.message}/>
+              <textarea name="message" placeholder="Message" onChange={handleChange} value={formData.message}/>
 
-        <input type="text" name="tags" placeholder="Tags" onChange={handleChange} value={formData.tags}/>
+              <input type="text" name="tags" placeholder="Tags" onChange={handleChange} value={formData.tags}/>
 
-        <input type="file" name="image" onChange={handleChange}/>
+              <ImageInput setImage={setImage} />
 
-        <button className="btn" onClick={handleSubmit}>{actionName}</button>
-      </form>
+              <button className="btn" onClick={handleSubmit}>{actionName}</button>
+            </form>
+          </>
+        :
+          <h3>Please register or login first to be able to post a memory!</h3>
+      }
 
-      {postToEdit && <button className="btn-cancel" onClick={cancelEdit}>Cancel Edit</button>}
+      {isFormInEditMode && <button className="btn-cancel" onClick={cancelEdit}>Cancel Edit</button>}
     </div>
   )
 }

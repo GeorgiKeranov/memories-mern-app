@@ -13,8 +13,6 @@ const logError = (state, action) => {
 
 const updatePostsState = (state, action) => {
   const updatedPost = action.payload;
-  
-  state.isFormLoading = false;
 
   state.posts = state.posts.map(post => {
     if (post._id === updatedPost._id) {
@@ -25,20 +23,28 @@ const updatePostsState = (state, action) => {
   });
 };
 
+const initialFormData = {title: '', message: '', tags: ''};
+
 const postsSlice = createSlice({
   name: 'posts',
   initialState: {
     posts: [],
     arePostsLoading: true,
-    postToEdit: null,
+    formData: initialFormData,
+    isFormInEditMode: false,
     isFormLoading: false
   },
   reducers: {
-    setPostToEdit: (state, action) => {
-      state.postToEdit = action.payload;
+    setFormData: (state, action) => {
+      state.formData = action.payload;
     },
-    toggleIsFormLoading: state => {
-      state.isFormLoading = !state.isFormLoading;
+    setFormDataInEditMode: (state, action) => {
+      state.isFormInEditMode = true;
+      state.formData = action.payload
+    },
+    resetFormData: state => {
+      state.isFormInEditMode = false;
+      state.formData = initialFormData;
     }
   },
   extraReducers: {
@@ -49,10 +55,10 @@ const postsSlice = createSlice({
     },
     [getPosts.fulfilled]: (state, action) => {
       state.posts = action.payload
-      state.arePostsLoading = false
+      state.arePostsLoading = false;
     },
     [getPosts.rejected]: (state, action) => {
-      console.log(action.error);
+      logError(state, action);
 
       state.arePostsLoading = false;
     },
@@ -63,10 +69,11 @@ const postsSlice = createSlice({
     },
     [savePost.fulfilled]: (state, action) => {
       state.isFormLoading = false;
+      state.formData = initialFormData;
       state.posts.push(action.payload);
     },
     [savePost.rejected]: (state, action) => {
-      console.log(action.error);
+      logError(state, action);
       
       state.isFormLoading = false;
     },
@@ -75,9 +82,14 @@ const postsSlice = createSlice({
     [updatePost.pending]: state => {
       state.isFormLoading = true;
     },
-    [updatePost.fulfilled]: updatePostsState,
+    [updatePost.fulfilled]: (state, action) => {
+      updatePostsState(state, action);
+      state.formData = initialFormData;
+      state.isFormInEditMode = false;
+      state.isFormLoading = false;
+    },
     [updatePost.rejected]: (state, action) =>{
-      console.log(action.error);
+      logError(state, action);
 
       state.isFormLoading = false;
     },
@@ -96,6 +108,6 @@ const postsSlice = createSlice({
   }
 });
 
-export const { setPostToEdit, toggleIsFormLoading } = postsSlice.actions;
+export const { setFormData, setFormDataInEditMode, resetFormData } = postsSlice.actions;
 
 export default postsSlice.reducer;

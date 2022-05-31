@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setPostToEdit, removePost } from '../../../redux/posts';
+import { setFormDataInEditMode, removePost } from '../../../redux/posts';
 import './Post.css';
 import PostTimeDifference from './PostTimeDifference/PostTimeDifference';
 import PostLikes from './PostLikes/PostLikes';
@@ -16,7 +16,7 @@ export default function Post({post}) {
   const postIntroStyle = { backgroundImage: `url(${post.image})` };
 
   function handleEditPost() {
-    dispatch(setPostToEdit(post));
+    dispatch(setFormDataInEditMode(post));
   }
 
   function handlePostRemove() {
