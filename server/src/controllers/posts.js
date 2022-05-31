@@ -31,7 +31,7 @@ export const updatePost = async (req, res) => {
         const post = await Post.findByIdAndUpdate(postId, postData, {returnDocument: 'after'});
         
         if (!post) {
-            return res.status(400).send({error: 'The post is not existing!'});
+            return res.status(404).send({error: 'The post is not existing!'});
         }
 
         res.status(200).send(post);
@@ -47,7 +47,7 @@ export const removePost = async (req, res) => {
         const post = await Post.findByIdAndRemove(postId);
         
         if (!post) {
-            return res.status(400).send({error: 'The post is not existing!'});
+            return res.status(404).send({error: 'The post is not existing!'});
         }
 
         res.status(200).send(post);
@@ -55,3 +55,30 @@ export const removePost = async (req, res) => {
         res.status(400).send({error: error.message});
     }
 }
+
+export const likePost = async (req, res) => {
+    const postId = req.params.id;
+
+    try {
+        const post = await Post.findById(postId);
+        
+        if (!post) {
+            return res.status(404).send({error: 'The post is not existing!'});
+        }
+
+        const authUserId = req.authUserId;
+        // The post is already liked by the user so remove the user id from likes
+        if (post.likes.includes(authUserId)) {
+            post.likes = post.likes.filter(userId => userId !== authUserId);
+        } else { // The post is not liked by the user so add the user id in likes
+            post.likes.push(authUserId);
+        }
+
+        await post.save();
+
+        res.status(200).send(post);
+    } catch (error) {
+        res.status(400).send({error: error.message});
+    }
+}
+
