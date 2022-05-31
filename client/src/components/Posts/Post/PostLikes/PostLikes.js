@@ -22,7 +22,9 @@ export default function PostLikes({postId, postLikes, authenticatedUser}) {
     <div className="post__like">
       <p className="post__likes-count">{postLikes.length} LIKE{postLikes.length === 1 ? '' : 'S'}</p>
 
-      <button className={likeBtnClasses} onClick={handleLikePost}>Like</button>
+      {authenticatedUser &&
+        <button className={likeBtnClasses} onClick={handleLikePost}>Like</button>
+      }
     </div>
   )
 }
