@@ -67,7 +67,7 @@ export const likePost = async (req, res) => {
             return res.status(404).send({error: 'The post is not existing!'});
         }
 
-        const authUserId = req.authUser._id;
+        const authUserId = req.authUser._id.toString();
         // The post is already liked by the user so remove the user id from likes
         if (post.likes.includes(authUserId)) {
             post.likes = post.likes.filter(userId => userId !== authUserId);
