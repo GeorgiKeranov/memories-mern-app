@@ -53,7 +53,7 @@ export default function Form() {
     event.preventDefault();
 
     if (postToEdit) {
-      return dispatch(updatePost({id: postToEdit._id, data: formData}));
+      return dispatch(updatePost({postId: postToEdit._id, postData: formData}));
     }
 
     dispatch(savePost(formData));
