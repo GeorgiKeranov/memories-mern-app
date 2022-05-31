@@ -14,7 +14,7 @@ const logError = (state, action) => {
 const updatePostsState = (state, action) => {
   const updatedPost = action.payload;
 
-  state.value = state.value.map(post => {
+  state.posts = state.posts.map(post => {
     if (post._id === updatedPost._id) {
       return updatedPost;
     }
@@ -26,8 +26,8 @@ const updatePostsState = (state, action) => {
 const postsSlice = createSlice({
   name: 'posts',
   initialState: {
-    value: [],
-    isLoading: true,
+    posts: [],
+    arePostsLoading: true,
     postToEdit: null
   },
   reducers: {
@@ -37,20 +37,20 @@ const postsSlice = createSlice({
   },
   extraReducers: {
     [getPosts.pending]: (state) => {
-      state.value = [];
-      state.isLoading = true;
+      state.posts = [];
+      state.arePostsLoading = true;
     },
     [getPosts.fulfilled]: (state, action) => {
-      state.value = action.payload
-      state.isLoading = false
+      state.posts = action.payload
+      state.arePostsLoading = false
     },
     [getPosts.rejected]: (state, action) => {
       console.log(action.error);
 
-      state.isLoading = false;
+      state.arePostsLoading = false;
     },
     [savePost.fulfilled]: (state, action) => {
-      state.value.push(action.payload);
+      state.posts.push(action.payload);
     },
     [savePost.rejected]: logError,
     [updatePost.fulfilled]: updatePostsState,
@@ -58,7 +58,7 @@ const postsSlice = createSlice({
     [removePost.fulfilled]: (state, action) => {
       const savedPost = action.payload;
       
-      state.value = state.value.filter(post => post._id !== savedPost._id);
+      state.posts = state.posts.filter(post => post._id !== savedPost._id);
     },
     [removePost.rejected]: logError,
     [likePost.fulfilled]: updatePostsState,

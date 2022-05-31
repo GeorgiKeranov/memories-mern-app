@@ -6,7 +6,7 @@ import Post from './Post/Post';
 import Loader from '../Loader/Loader';
 
 export default function Posts() {
-  const [posts, isLoading] = useSelector(state => [state.posts.value, state.posts.isLoading]);
+  const [posts, arePostsLoading] = useSelector(state => [state.posts.posts, state.posts.arePostsLoading]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export default function Posts() {
 
   return (
     <section className="posts">
-      {isLoading && <Loader />}
+      {arePostsLoading && <Loader />}
 
       {postElements}
     </section>
