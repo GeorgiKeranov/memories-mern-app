@@ -7,7 +7,6 @@ export default function Form() {
   const dispatch = useDispatch();
 
   const formDataInitialState = {
-    creator: '',
     title: '',
     message: '',
     tags: '',
@@ -80,8 +79,6 @@ export default function Form() {
       <h2>{actionName} a Memory</h2>
 
       <form>
-        <input type="text" name="creator" placeholder="Creator" onChange={handleChange} value={formData.creator}/>
-
         <input type="text" name="title" placeholder="Title" onChange={handleChange} value={formData.title}/>
 
         <textarea name="message" placeholder="Message" onChange={handleChange} value={formData.message}/>
