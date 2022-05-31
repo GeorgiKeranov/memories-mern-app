@@ -40,7 +40,7 @@ export default function Post(props) {
     <div className="post">
       <div className="post__intro" style={postIntroStyle}>
         <div className="post__heading">
-          <h4>{post.creator}</h4>
+          <h4>{post.author.firstName} {post.author.lastName}</h4>
 
           <p>{timeDifference} {timeDifferenceString}{timeDifference > 1 ? 's' : ''} ago</p>
         </div>
