@@ -46,11 +46,19 @@ export const removePost = async (req, res) => {
     const postId = req.params.id;
 
     try {
-        const post = await Post.findByIdAndRemove(postId);
+        const post = await Post.findById(postId);
         
         if (!post) {
             return res.status(404).send({error: 'The post is not existing!'});
         }
+
+        const authUser = req.authUser;
+        const authUserId = authUser._id.toString();
+        if (post.author !== authUserId) {
+            return res.status(401).send({error: 'You are not the author of the post!'});
+        }
+
+        await post.remove();
 
         res.status(200).send(post);
     } catch (error) {
