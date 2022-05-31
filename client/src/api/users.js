@@ -1,3 +1,5 @@
+import axiosRequest from './axiosRequest';
+
 export async function registerUser(userData) {
   return sendAuthRequest('/users/register', userData);
 }
@@ -7,20 +9,14 @@ export async function loginUser(userData) {
 }
 
 async function sendAuthRequest(endpoint, userData) {
-  const response = await fetch(process.env.REACT_APP_API_URL + endpoint, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(userData)
-  });
+  const response = await axiosRequest.post(endpoint, userData);
   
-  const responseObj = await response.json();
-  if (responseObj.error) {
-    throw new Error(responseObj.error);
+  const responseData = response.data;
+  if (responseData.error) {
+    throw new Error(responseData.error);
   }
   
-  const user = {...responseObj.user, token: responseObj.token};
+  const user = {...responseData.user, token: responseData.token};
   
   return user;
 }
