@@ -55,7 +55,7 @@ export default function Post(props) {
 
         <div className="post__actions">
           <div className="post__like">
-            <p className="post__likes-count">{post.likeCount} LIKE{post.likeCount === 1 ? '' : 'S'}</p>
+            <p className="post__likes-count">{post.likes.length} LIKE{post.likes.length === 1 ? '' : 'S'}</p>
 
             <button className="btn-like">Like</button>
           </div>
