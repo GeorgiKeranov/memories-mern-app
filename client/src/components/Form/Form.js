@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './Form.css';
 import { savePost, updatePost, setPostToEdit } from '../../redux/posts';
+import Loader from '../Loader/Loader';
 
 export default function Form() {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ export default function Form() {
 
   const [formData, setFormData] = useState(formDataInitialState);
 
-  const postToEdit = useSelector(state => state.posts.postToEdit);
+  const [postToEdit, isFormLoading] = useSelector(state => [state.posts.postToEdit, state.posts.isFormLoading]);
   const actionName = postToEdit ? 'Edit' : 'Post';
 
   useEffect(() => {
@@ -72,6 +73,10 @@ export default function Form() {
     dispatch(setPostToEdit(null));
 
     setFormData(formDataInitialState);
+  }
+
+  if (isFormLoading) {
+    return <Loader />;
   }
 
   return (
