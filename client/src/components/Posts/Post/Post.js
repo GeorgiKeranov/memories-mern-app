@@ -26,9 +26,11 @@ export default function Post(props) {
   timeDifference = Math.round(timeDifference);
 
   let likeBtnClasses = 'btn-like';
-  const isPostLikedByCurrentUser = post.likes.includes(authenticatedUser._id);
-  if (isPostLikedByCurrentUser) {
-    likeBtnClasses += ' btn-like--liked';
+  if (authenticatedUser) {
+    const isPostLikedByCurrentUser = post.likes.includes(authenticatedUser._id);
+    if (isPostLikedByCurrentUser) {
+      likeBtnClasses += ' btn-like--liked';
+    }
   }
 
   function editPost() {
