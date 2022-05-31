@@ -57,7 +57,7 @@ export default function Login() {
   }
 
   return (
-    <div className="form form--authenticate">
+    <div className="form form--authenticate grow-and-fade-in-animation">
       <h2>Login</h2>
 
       <form onSubmit={submitForm}>

@@ -80,7 +80,7 @@ export default function Form() {
   }
 
   return (
-    <div className="form form--create-memory">
+    <div className="form form--create-memory grow-and-fade-in-animation">
       <h2>{actionName} a Memory</h2>
 
       <form>

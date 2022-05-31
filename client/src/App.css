@@ -235,3 +235,19 @@ a:hover:before {
   margin: 0 auto;
   padding: 0 20px;
 }
+
+.grow-and-fade-in-animation {
+  animation: .3s growAndFadeIn;
+  transition: opacity .3s cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform .2s cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+@keyframes growAndFadeIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform:scale(1);
+    opacity: 1;
+  }
+}
