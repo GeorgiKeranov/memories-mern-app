@@ -22,7 +22,7 @@ const userSchema = mongoose.Schema({
         required: true,
         minLength: 8
     },
-    image: String,
+    image: String
 });
 
 // Hash plain password before save or updateto the database
@@ -50,9 +50,10 @@ userSchema.post('save', (error, doc, next) => {
     }
 });
 
-// Hide password when returning response with the user information
+// Hide email and password when returning response with the user information
 userSchema.methods.toJSON = function() {
     let user = this.toObject();
+    delete user.email;
     delete user.password;
     
     return user;

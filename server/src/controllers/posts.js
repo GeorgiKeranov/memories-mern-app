@@ -2,7 +2,7 @@ import Post from '../models/post.js';
 
 export const getPosts = async (req, res) => {
     try {
-        const posts = await Post.find();
+        const posts = await Post.find().populate('author');
 
         res.status(200).send(posts);
     } catch (error) {
@@ -11,10 +11,11 @@ export const getPosts = async (req, res) => {
 }
 
 export const savePost = async (req, res) => {
-    const body = req.body;
+    const postData = req.body;
+    const authUser = req.authUser;
 
     try {
-        const post = new Post(body);
+        const post = new Post({...postData, author: authUser._id});
         const postSaved = await post.save();
 
         res.status(200).send(postSaved);
@@ -28,7 +29,7 @@ export const updatePost = async (req, res) => {
     const postData = req.body;
 
     try {
-        const post = await Post.findByIdAndUpdate(postId, postData, {returnDocument: 'after'});
+        const post = await Post.findByIdAndUpdate(postId, postData, {returnDocument: 'after'}).populate('author');
         
         if (!post) {
             return res.status(404).send({error: 'The post is not existing!'});
@@ -60,13 +61,13 @@ export const likePost = async (req, res) => {
     const postId = req.params.id;
 
     try {
-        const post = await Post.findById(postId);
+        const post = await Post.findById(postId).populate('author');
         
         if (!post) {
             return res.status(404).send({error: 'The post is not existing!'});
         }
 
-        const authUserId = req.authUserId;
+        const authUserId = req.authUser._id;
         // The post is already liked by the user so remove the user id from likes
         if (post.likes.includes(authUserId)) {
             post.likes = post.likes.filter(userId => userId !== authUserId);
