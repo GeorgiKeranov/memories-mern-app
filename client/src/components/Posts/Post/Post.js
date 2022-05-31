@@ -7,7 +7,11 @@ import PostLikes from './PostLikes/PostLikes';
 export default function Post({post}) {
   const dispatch = useDispatch();
   const authenticatedUser = useSelector(state => state.auth.user);
-  const isAuthor = post.author._id === authenticatedUser._id;
+  
+  let isAuthor = false;
+  if (authenticatedUser) {
+    isAuthor = post.author._id === authenticatedUser._id;
+  }
 
   const postIntroStyle = { backgroundImage: `url(${post.image})` };
 
