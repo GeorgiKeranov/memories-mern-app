@@ -5,10 +5,23 @@ export const getPosts = createAsyncThunk('posts/getPosts', postsApi.getPosts);
 export const savePost = createAsyncThunk('posts/savePost', postsApi.savePost);
 export const updatePost = createAsyncThunk('posts/updatePost', postsApi.updatePost);
 export const removePost = createAsyncThunk('posts/removePost', postsApi.removePost);
+export const likePost = createAsyncThunk('posts/likePost', postsApi.likePost);
 
 const logError = (state, action) => {
   console.log(action.error);
 }
+
+const updatePostsState = (state, action) => {
+  const updatedPost = action.payload;
+
+  state.value = state.value.map(post => {
+    if (post._id === updatedPost._id) {
+      return updatedPost;
+    }
+
+    return post;
+  });
+};
 
 const postsSlice = createSlice({
   name: 'posts',
@@ -40,24 +53,16 @@ const postsSlice = createSlice({
       state.value.push(action.payload);
     },
     [savePost.rejected]: logError,
-    [updatePost.fulfilled]: (state, action) => {
-      const savedPost = action.payload;
-
-      state.value = state.value.map(post => {
-        if (post._id === savedPost._id) {
-          return savedPost;
-        }
-
-        return post;
-      });
-    },
+    [updatePost.fulfilled]: updatePostsState,
     [updatePost.rejected]: logError,
     [removePost.fulfilled]: (state, action) => {
       const savedPost = action.payload;
       
       state.value = state.value.filter(post => post._id !== savedPost._id);
     },
-    [removePost.rejected]: logError
+    [removePost.rejected]: logError,
+    [likePost.fulfilled]: updatePostsState,
+    [likePost.rejected]: logError
   }
 });
 
