@@ -1,9 +1,10 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setPostToEdit, removePost, likePost } from '../../../redux/posts';
 import './Post.css';
 
 export default function Post(props) {
   const dispatch = useDispatch();
+  const authenticatedUser = useSelector(state => state.auth.user);
   const post = props.post;
 
   const postIntroStyle = {
@@ -23,6 +24,12 @@ export default function Post(props) {
   }
 
   timeDifference = Math.round(timeDifference);
+
+  let likeBtnClasses = 'btn-like';
+  const isPostLikedByCurrentUser = post.likes.includes(authenticatedUser._id);
+  if (isPostLikedByCurrentUser) {
+    likeBtnClasses += ' btn-like--liked';
+  }
 
   function editPost() {
     dispatch(setPostToEdit(post));
@@ -61,7 +68,7 @@ export default function Post(props) {
           <div className="post__like">
             <p className="post__likes-count">{post.likes.length} LIKE{post.likes.length === 1 ? '' : 'S'}</p>
 
-            <button className="btn-like" onClick={handleLikePost}>Like</button>
+            <button className={likeBtnClasses} onClick={handleLikePost}>Like</button>
           </div>
 
           <div className="post__remove">

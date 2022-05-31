@@ -177,6 +177,7 @@ a:hover:before {
   background-repeat: no-repeat;
 }
 
+.btn-like--liked,
 .btn-like:hover,
 .btn-like--filled {
   background-image: url(/public/like-filled.png);
