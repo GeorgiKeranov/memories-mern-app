@@ -67,7 +67,8 @@ export const removePost = async (req, res) => {
 
         const authUser = req.authUser;
         const authUserId = authUser._id.toString();
-        if (post.author !== authUserId) {
+
+        if (post.author.toString() !== authUserId) {
             return res.status(401).send({error: 'You are not the author of the post!'});
         }
 
