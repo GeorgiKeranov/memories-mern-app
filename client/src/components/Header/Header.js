@@ -17,10 +17,18 @@ export default function Header() {
       <div className="container">
         <div className="header__columns">
           <div className="header__title">
-            <h2>MEMORIES</h2>
+            <h2><Link to="/">MEMORIES</Link></h2>
           </div>
 
           <div className="header__navigation">
+            {user &&
+              <div className="header__logged-user">
+                <span className="header__first-name-letter">{user.firstName[0]}</span>
+
+                <h3>{`${user.firstName} ${user.lastName}`}</h3>
+              </div>
+            }
+
             <nav>
               <ul>
                 <li>
@@ -29,7 +37,7 @@ export default function Header() {
 
                 {user ? (
                   <li>
-                    <a href="/logout" onClick={logout}>Logout</a>
+                    <button className="btn-cancel" onClick={logout}>Logout</button>
                   </li>
                 ) : (
                   <>

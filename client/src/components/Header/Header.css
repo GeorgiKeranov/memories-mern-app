@@ -12,6 +12,38 @@
     justify-content: space-between;
 }
 
+.header .header__title a:hover:before {
+    width: 0;
+}
+
+.header .header__navigation {
+    display: flex;
+    align-items: center;
+}
+
+.header .header__logged-user {
+    display: flex;
+    align-items: center;
+    margin-right: 40px;
+}
+
+.header .header__first-name-letter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #00579c;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 22px;
+    margin-right: 20px;
+}
+
+.header .header__logged-user h3 {
+    margin-bottom: 0;
+}
+
 .header h2 {
     margin: 3px 0 0;
     line-height: 1;
