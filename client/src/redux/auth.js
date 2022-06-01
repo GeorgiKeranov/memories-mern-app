@@ -15,7 +15,7 @@ const authFulfilled = (state, action) => {
 }
 
 const authRejected = (state, action) => {
-  state.errorMessage = action.error.message;
+  state.errorMessage = action.payload.error;
   state.isLoading = false;
 }
 
