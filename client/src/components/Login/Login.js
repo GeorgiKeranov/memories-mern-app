@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser, resetErrorMessage } from '../../redux/auth';
 import Loader from '../Loader/Loader';
+import Main from '../Main/Main';
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -57,22 +58,24 @@ export default function Login() {
   }
 
   return (
-    <div className="form form--authenticate grow-and-fade-in-animation">
-      <h2>Login</h2>
+    <Main>
+      <div className="form form--authenticate grow-and-fade-in-animation">
+        <h2>Login</h2>
 
-      <form onSubmit={submitForm}>
-        <input type="email" name="email" placeholder="Email Address *" required onChange={handleChange} value={formData.email}/>
+        <form onSubmit={submitForm}>
+          <input type="email" name="email" placeholder="Email Address *" required onChange={handleChange} value={formData.email}/>
 
-        <input type="password" name="password" placeholder="Password *" required onChange={handleChange} value={formData.password}/>
-        
-        {errorMessage && <p className="form__error-message">{errorMessage}</p>}
+          <input type="password" name="password" placeholder="Password *" required onChange={handleChange} value={formData.password}/>
+          
+          {errorMessage && <p className="form__error-message">{errorMessage}</p>}
 
-        <button className="btn" type="submit">Login</button>
-      </form>
+          <button className="btn" type="submit">Login</button>
+        </form>
 
-      <div className="form__right-aligned">
-        <Link to="/register">Don't have an account? Click here!</Link>
+        <div className="form__right-aligned">
+          <Link to="/register">Don't have an account? Click here!</Link>
+        </div>
       </div>
-    </div>
+    </Main>
   )
 }

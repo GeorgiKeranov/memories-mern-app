@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser, resetErrorMessage, setErrorMessage } from '../../redux/auth';
 import Loader from '../Loader/Loader';
+import Main from '../Main/Main';
 
 export default function Register() {
   const dispatch = useDispatch();
@@ -69,30 +70,32 @@ export default function Register() {
   }
 
   return (
-    <div className="form form--authenticate grow-and-fade-in-animation">
-      <h2>Register</h2>
+    <Main>
+      <div className="form form--authenticate grow-and-fade-in-animation">
+        <h2>Register</h2>
 
-      <form onSubmit={submitForm}>
-        <div className="form__two-cols">
-          <input type="text" name="firstName" placeholder="First Name *" required onChange={handleChange} value={formData.firstName}/>
+        <form onSubmit={submitForm}>
+          <div className="form__two-cols">
+            <input type="text" name="firstName" placeholder="First Name *" required onChange={handleChange} value={formData.firstName}/>
 
-          <input type="text" name="lastName" placeholder="Last Name *" required onChange={handleChange} value={formData.lastName}/>
+            <input type="text" name="lastName" placeholder="Last Name *" required onChange={handleChange} value={formData.lastName}/>
+          </div>
+
+          <input type="email" name="email" placeholder="Email Address *" required onChange={handleChange} value={formData.email}/>
+
+          <input type="password" name="password" autoComplete="aus" placeholder="Password *" required minLength="8" onChange={handleChange} value={formData.password}/>
+          
+          <input type="password" name="repeatPassword" placeholder="Repeat Password *" required minLength="8" onChange={handleChange} value={formData.repeatPassword}/>
+
+          {errorMessage && <p className="form__error-message">{errorMessage}</p>}
+
+          <button className="btn" type="submit">Register</button>
+        </form>
+
+        <div className="form__right-aligned">
+          <Link to="/login">Already have an account? Click here!</Link>
         </div>
-
-        <input type="email" name="email" placeholder="Email Address *" required onChange={handleChange} value={formData.email}/>
-
-        <input type="password" name="password" autoComplete="aus" placeholder="Password *" required minLength="8" onChange={handleChange} value={formData.password}/>
-        
-        <input type="password" name="repeatPassword" placeholder="Repeat Password *" required minLength="8" onChange={handleChange} value={formData.repeatPassword}/>
-
-        {errorMessage && <p className="form__error-message">{errorMessage}</p>}
-
-        <button className="btn" type="submit">Register</button>
-      </form>
-
-      <div className="form__right-aligned">
-        <Link to="/login">Already have an account? Click here!</Link>
       </div>
-    </div>
+    </Main>
   )
 }
