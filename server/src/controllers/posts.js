@@ -26,6 +26,7 @@ export const getPosts = async (req, res) => {
             .find(search)
             .limit(postsPerPage)
             .skip((page - 1) * postsPerPage)
+            .sort('-createdAt')
             .populate('author');
 
         res.status(200).send({posts, currentPage: page, numberOfPages });
