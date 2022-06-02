@@ -13,14 +13,16 @@ export default function Posts() {
     dispatch(getPosts());
   }, [dispatch]);
   
+  if (arePostsLoading) {
+    return <Loader />;
+  }
+
   const postElements = posts.map(post => {
     return <Post key={post._id} post={post} />
   });
 
   return (
     <section className="posts grow-and-fade-in-animation">
-      {arePostsLoading && <Loader />}
-
       {postElements}
     </section>
   )
