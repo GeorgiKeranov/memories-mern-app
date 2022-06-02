@@ -29,7 +29,11 @@ const postsSlice = createSlice({
   name: 'posts',
   initialState: {
     posts: [],
-    currentPage: 0,
+    filter: {
+      page: 1,
+      title: '',
+      tags: '',
+    },
     numberOfPages: 0,
     arePostsLoading: true,
     formData: initialFormData,
@@ -55,6 +59,9 @@ const postsSlice = createSlice({
     resetFormData: state => {
       state.isFormInEditMode = false;
       state.formData = initialFormData;
+    },
+    setFilterFields: (state, action) => {
+      state.filter = {...state.filter, ...action.payload};
     }
   },
   extraReducers: {
@@ -65,7 +72,6 @@ const postsSlice = createSlice({
     },
     [getPosts.fulfilled]: (state, action) => {
       state.posts = action.payload.posts;
-      state.currentPage = action.payload.currentPage;
       state.numberOfPages = action.payload.numberOfPages;
       state.arePostsLoading = false;
     },
@@ -120,6 +126,6 @@ const postsSlice = createSlice({
   }
 });
 
-export const { setFormData, setFormDataInEditMode, resetFormData } = postsSlice.actions;
+export const { setFormData, setFormDataInEditMode, resetFormData, setFilterFields } = postsSlice.actions;
 
 export default postsSlice.reducer;
