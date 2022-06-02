@@ -4,6 +4,7 @@ import MainSidebar from '../Main/MainColumns/MainSidebar';
 import Posts from '../Posts/Posts';
 import SearchForm from '../SearchForm/SearchForm';
 import MemoryForm from '../MemoryForm/MemoryForm';
+import Pagination from '../Pagination/Pagination';
 
 export default function Home() {
   return (
@@ -16,6 +17,8 @@ export default function Home() {
         <SearchForm />
 
         <MemoryForm />
+
+        <Pagination />
       </MainSidebar>
     </Main>
   )
