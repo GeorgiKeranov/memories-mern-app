@@ -3,14 +3,24 @@ import Post from '../models/post.js';
 export const getPosts = async (req, res) => {
     const postsPerPage = 1;
     let page = 1;
+    let search = {};
 
     if (req.query.page) {
         page = req.query.page;
     }
 
+    if (req.query.title) {
+        search.title = new RegExp(req.query.title);
+    }
+
+    if (req.query.tags) {
+        let tagsArray = req.query.tags.split(';');
+        search.tags = {$all: tagsArray};
+    }
+
     try {
         const posts = await Post
-            .find()
+            .find(search)
             .limit(postsPerPage)
             .skip((page - 1) * postsPerPage)
             .populate('author');
