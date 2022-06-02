@@ -1,11 +1,15 @@
-.loader,
-.loader:after {
+.loader {
+  overflow: hidden;
+}
+
+.loader .loader__inner,
+.loader .loader__inner:after {
   border-radius: 50%;
   width: 10em;
   height: 10em;
 }
 
-.loader {
+.loader .loader__inner {
   margin: 60px auto;
   font-size: 10px;
   position: relative;
