@@ -1,8 +1,5 @@
 .main {
   padding: 30px 20px;
-}
-
-.main .main__columns {
   display: flex;
   justify-content: space-between;
 }
