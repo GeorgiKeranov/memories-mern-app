@@ -29,6 +29,8 @@ const postsSlice = createSlice({
   name: 'posts',
   initialState: {
     posts: [],
+    currentPage: 0,
+    numberOfPages: 0,
     arePostsLoading: true,
     formData: initialFormData,
     isFormInEditMode: false,
@@ -62,7 +64,9 @@ const postsSlice = createSlice({
       state.arePostsLoading = true;
     },
     [getPosts.fulfilled]: (state, action) => {
-      state.posts = action.payload
+      state.posts = action.payload.posts;
+      state.currentPage = action.payload.currentPage;
+      state.numberOfPages = action.payload.numberOfPages;
       state.arePostsLoading = false;
     },
     [getPosts.rejected]: (state, action) => {
