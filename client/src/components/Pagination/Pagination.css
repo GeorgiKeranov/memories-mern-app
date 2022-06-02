@@ -35,6 +35,10 @@
   color: #fff;
 }
 
+.pagination button.current {
+  pointer-events: none;
+}
+
 .pagination button:disabled {
   color: rgba(0, 0, 0, 0.23);
   cursor: auto;

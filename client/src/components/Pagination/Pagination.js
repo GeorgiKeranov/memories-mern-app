@@ -1,14 +1,43 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPosts } from '../../redux/posts';
 import './Pagination.css';
 
 export default function Pagination() {
-  const {currentPage, numberOfPages } = useSelector(state => state.posts);
-  const maxVisiblePages = 1;
+  const dispatch = useDispatch();
 
-  if (!numberOfPages) {
+  const [currentPage, numberOfPages, arePostsLoading] = useSelector(state => {
+    return [
+      state.posts.filter.page,
+      state.posts.numberOfPages,
+      state.posts.arePostsLoading
+    ]
+  });
+
+  if (arePostsLoading) {
     return <></>;
   }
 
+  if (numberOfPages <= 1 ) {
+    return <></>;
+  }
+
+  function prevPage() {
+    goToPage(null, currentPage - 1);
+  }
+
+  function nextPage() {
+    goToPage(null, currentPage + 1);
+  }
+
+  function goToPage(event, page) {
+    if (event) {
+      page = parseInt(event.target.innerText);
+    }
+
+    dispatch(getPosts(page));
+  }
+
+  const maxVisiblePages = 1;
   const visiblePages = [];
   // Generate visible pages before and after current page
   for (let page = currentPage - maxVisiblePages; page <= currentPage + maxVisiblePages; page++) {
@@ -26,25 +55,13 @@ export default function Pagination() {
     );
   })
 
-  function prevPage() {
-
-  }
-
-  function nextPage() {
-
-  }
-
-  function goToPage() {
-
-  }
-
   const firstPage = 1;
   const lastPage = numberOfPages;
   const firstVisiblePage = visiblePages[0];
   const lastVisiblePage = visiblePages[visiblePages.length - 1];
 
   return (
-    <div className="pagination">
+    <div className="pagination grow-and-fade-in-animation">
       <ul>
         <li><button disabled={currentPage === 1 ? 'disabled' : ''} onClick={prevPage}>{'⮜'}</button></li>
 
