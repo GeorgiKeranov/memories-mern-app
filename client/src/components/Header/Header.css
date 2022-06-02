@@ -1,15 +1,10 @@
 .header {
-    padding: 15px 0;
-    margin: 20px;
-    border-radius: 30px;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 25%);
-    background-color: #fff;
-}
-
-.header .header__columns {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 15px 20px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 25%);
+    background-color: #fff;
 }
 
 .header .header__title a:hover:before {

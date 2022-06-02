@@ -14,46 +14,42 @@ export default function Header() {
 
   return (
     <header className="header">
-      <div className="container">
-        <div className="header__columns">
-          <div className="header__title">
-            <h2><Link to="/">MEMORIES</Link></h2>
+      <div className="header__title">
+        <h2><Link to="/">MEMORIES</Link></h2>
+      </div>
+
+      <div className="header__navigation">
+        {user &&
+          <div className="header__logged-user">
+            <span className="header__first-name-letter">{user.firstName[0]}</span>
+
+            <h3>{`${user.firstName} ${user.lastName}`}</h3>
           </div>
+        }
 
-          <div className="header__navigation">
-            {user &&
-              <div className="header__logged-user">
-                <span className="header__first-name-letter">{user.firstName[0]}</span>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
 
-                <h3>{`${user.firstName} ${user.lastName}`}</h3>
-              </div>
-            }
-
-            <nav>
-              <ul>
+            {user ? (
+              <li>
+                <button className="btn-cancel" onClick={logout}>Logout</button>
+              </li>
+            ) : (
+              <>
                 <li>
-                  <Link to="/">Home</Link>
+                  <Link to="/register">Register</Link>
                 </li>
 
-                {user ? (
-                  <li>
-                    <button className="btn-cancel" onClick={logout}>Logout</button>
-                  </li>
-                ) : (
-                  <>
-                    <li>
-                      <Link to="/register">Register</Link>
-                    </li>
-
-                    <li>
-                      <Link to="/login">Login</Link>
-                    </li>
-                  </>
-                )}
-              </ul>
-            </nav>
-          </div>
-        </div>
+                <li>
+                  <Link to="/login">Login</Link>
+                </li>
+              </>
+            )}
+          </ul>
+        </nav>
       </div>
     </header>
   );
