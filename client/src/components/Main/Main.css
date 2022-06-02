@@ -12,6 +12,10 @@
   flex: 0 1 28%;
 }
 
+.main .main__sidebar > div + div {
+  margin-top: 40px;
+}
+
 @media (max-width: 1200px) {
   .main .main__content {
     flex-basis: 60%;
