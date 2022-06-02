@@ -22,7 +22,7 @@ export default function Pagination() {
 
   const visiblePagesJsx = visiblePages.map(page => {
     return (
-      <li><button className={page === currentPage ? 'current' : ''} onClick={goToPage}>{page}</button></li>
+      <li key={page}><button className={page === currentPage ? 'current' : ''} onClick={goToPage}>{page}</button></li>
     );
   })
 
