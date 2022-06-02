@@ -1,7 +1,7 @@
 import Post from '../models/post.js';
 
 export const getPosts = async (req, res) => {
-    const postsPerPage = 1;
+    const postsPerPage = 9;
     let page = 1;
     let search = {};
 
