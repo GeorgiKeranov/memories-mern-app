@@ -1,8 +1,19 @@
 import Post from '../models/post.js';
 
 export const getPosts = async (req, res) => {
+    const postsPerPage = 1;
+    let page = 1;
+
+    if (req.query.page) {
+        page = req.query.page;
+    }
+
     try {
-        const posts = await Post.find().populate('author');
+        const posts = await Post
+            .find()
+            .limit(postsPerPage)
+            .skip((page - 1) * postsPerPage)
+            .populate('author');
 
         res.status(200).send(posts);
     } catch (error) {
