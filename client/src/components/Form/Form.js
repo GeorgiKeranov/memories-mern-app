@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './Form.css';
 import { savePost, updatePost, setFormData, resetFormData } from '../../redux/posts';
@@ -13,6 +14,12 @@ export default function Form() {
     state.posts.isFormInEditMode,
     state.posts.isFormLoading
   ]);
+
+  useEffect(() => {
+    if (!authUser) {
+      dispatch(resetFormData());
+    }
+  }, [authUser, dispatch]);
 
   function handleChange(event) {
     const element = event.target;
@@ -73,12 +80,12 @@ export default function Form() {
 
               <button className="btn" onClick={handleSubmit}>{actionName}</button>
             </form>
+
+            {isFormInEditMode && <button className="btn-cancel" onClick={cancelEdit}>Cancel Edit</button>}
           </>
         :
           <h3>Please register or login first to be able to post a memory!</h3>
-      }
-
-      {isFormInEditMode && <button className="btn-cancel" onClick={cancelEdit}>Cancel Edit</button>}
+        }
     </div>
   )
 }
