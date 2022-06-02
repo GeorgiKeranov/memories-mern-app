@@ -23,7 +23,7 @@
 }
 
 @media (max-width: 900px) {
-  .main .main__columns {
+  .main {
     flex-wrap: wrap;
   }
 

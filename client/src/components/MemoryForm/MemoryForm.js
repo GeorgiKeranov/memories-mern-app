@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import './MemoryForm.css';
 import { savePost, updatePost, setFormData, resetFormData } from '../../redux/posts';
 import Loader from '../Loader/Loader';
 import ImageInput from './ImageInput/ImageInput';
@@ -64,7 +63,7 @@ export default function MemoryForm() {
   const actionName = isFormInEditMode ? 'Edit' : 'Post';
 
   return (
-    <div className="form form--create-memory grow-and-fade-in-animation">
+    <div className="form grow-and-fade-in-animation">
       {authUser ?
           <>
             <h2>{actionName} a Memory</h2>

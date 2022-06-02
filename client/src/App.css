@@ -103,7 +103,9 @@ a:hover:before {
   box-shadow: 0 0 10px rgba(0, 0, 0, 25%);
   border-radius: 10px;
   text-align: center;
-  background-color: #fff;  
+  background-color: #fff;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .form h2 {
@@ -134,11 +136,6 @@ a:hover:before {
 .form .form__error-message {
   text-align: left;
   color: red;
-}
-
-.form--authenticate {
-  max-width: 600px;
-  margin: 0 auto;
 }
 
 .form--authenticate input {
