@@ -1,9 +1,9 @@
 import axiosRequest from './axiosRequest';
-import { setFilterFields } from '../redux/posts';
+import * as postsSlice from '../redux/posts';
 
 export const getPosts = async (page, thunkAPI) => {
   if (page) {
-    thunkAPI.dispatch(setFilterFields({page}));
+    thunkAPI.dispatch(postsSlice.setFilterFields({page}));
   }
 
   const state = thunkAPI.getState();
@@ -20,8 +20,12 @@ export const getPosts = async (page, thunkAPI) => {
   return response.data;
 }
 
-export const savePost = async (postData) => {
+export const savePost = async (postData, thunkAPI) => {
   const response = await axiosRequest.post('/posts', postData);
+  
+  thunkAPI.dispatch(postsSlice.setFilterFields({page: 1, title: '', tags: ''}));
+  thunkAPI.dispatch(postsSlice.getPosts());
+  
   return response.data;
 }
 
@@ -30,8 +34,11 @@ export const updatePost = async ({postId, postData}) => {
   return response.data;
 }
 
-export const removePost = async (postId) => {
+export const removePost = async (postId, thunkAPI) => {
   const response = await axiosRequest.delete(`/posts/${postId}`);  
+
+  thunkAPI.dispatch(postsSlice.getPosts());
+
   return response.data;
 }
 

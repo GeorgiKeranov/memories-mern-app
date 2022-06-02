@@ -85,10 +85,9 @@ const postsSlice = createSlice({
     [savePost.pending]: state => {
       state.isFormLoading = true;
     },
-    [savePost.fulfilled]: (state, action) => {
+    [savePost.fulfilled]: state => {
       state.isFormLoading = false;
       state.formData = initialFormData;
-      state.posts.push(action.payload);
     },
     [savePost.rejected]: (state, action) => {
       logError(state, action);
@@ -113,11 +112,6 @@ const postsSlice = createSlice({
     },
 
     // Remove Post
-    [removePost.fulfilled]: (state, action) => {
-      const savedPost = action.payload;
-      
-      state.posts = state.posts.filter(post => post._id !== savedPost._id);
-    },
     [removePost.rejected]: logError,
 
     // Like Post
