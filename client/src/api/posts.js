@@ -1,7 +1,22 @@
 import axiosRequest from './axiosRequest';
+import { setFilterFields } from '../redux/posts';
 
-export const getPosts = async () => {
-  const response = await axiosRequest.get('/posts');
+export const getPosts = async (page, thunkAPI) => {
+  if (page) {
+    thunkAPI.dispatch(setFilterFields({page}));
+  }
+
+  const state = thunkAPI.getState();
+  const filter = {...state.posts.filter};
+
+  if (filter.tags) {
+    // Split tags by '#' and remove whitespace before and after every tag
+    filter.tags = filter.tags.split('#').map(tag => tag.trim());
+    // Remove the empty tags and then join them by ';'
+    filter.tags = filter.tags.filter(tag => tag).join(';');
+  }
+
+  const response = await axiosRequest.get('/posts', {params: filter});
   return response.data;
 }
 
