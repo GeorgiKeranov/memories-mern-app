@@ -22,12 +22,10 @@ export default function MemoryForm() {
 
   function handleChange(event) {
     const element = event.target;
-    const name = element.name;
-    const value = element.value
 
     const newFormData = {
       ...formData,
-      [name]: name === 'tags' ? value.split(',') : value
+      [element.name]: element.value
     };
 
     dispatch(setFormData(newFormData));

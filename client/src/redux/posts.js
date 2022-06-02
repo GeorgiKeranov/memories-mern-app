@@ -40,7 +40,15 @@ const postsSlice = createSlice({
     },
     setFormDataInEditMode: (state, action) => {
       state.isFormInEditMode = true;
-      state.formData = action.payload
+      
+      if (action.payload.tags) {
+        const formData = {...action.payload};
+        formData.tags = '#' + formData.tags.join(' #');
+        state.formData = formData;
+        return;
+      }
+      
+      state.formData = action.payload;
     },
     resetFormData: state => {
       state.isFormInEditMode = false;
