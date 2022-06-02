@@ -6,11 +6,11 @@ export const getPosts = async (req, res) => {
     let search = {};
 
     if (req.query.page) {
-        page = req.query.page;
+        page = parseInt(req.query.page);
     }
 
     if (req.query.title) {
-        search.title = new RegExp(req.query.title);
+        search.title = new RegExp(req.query.title, 'i');
     }
 
     if (req.query.tags) {
@@ -19,13 +19,16 @@ export const getPosts = async (req, res) => {
     }
 
     try {
+        const postsCount = await Post.countDocuments(search);
+        const numberOfPages = Math.ceil(postsCount / postsPerPage);
+
         const posts = await Post
             .find(search)
             .limit(postsPerPage)
             .skip((page - 1) * postsPerPage)
             .populate('author');
 
-        res.status(200).send(posts);
+        res.status(200).send({posts, currentPage: page, numberOfPages });
     } catch (error) {
         res.status(400).send({error: error.message});
     }
