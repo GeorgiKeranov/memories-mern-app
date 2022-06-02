@@ -26,6 +26,7 @@ input, textarea {
   padding: 10px 15px;
   margin-bottom: 10px;
   font-size: 16px;
+  border-radius: 5px;
   border: 1px solid #ddd;
 }
 
@@ -40,6 +41,7 @@ input:focus-visible, textarea:focus-visible {
 button {
   background-color: #000;
   border: 2px solid #000;
+  border-radius: 5px;
   color: #fff;
   padding: 7px 20px;
   font-family: 'Heebo', sans-serif;
