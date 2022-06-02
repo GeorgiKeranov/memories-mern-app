@@ -44,7 +44,7 @@ export default function Post({post}) {
 
         <h3>{post.title}</h3>
 
-        <p>{post.message}</p>
+        <p className="post__description">{post.message}</p>
 
         <div className="post__actions">
           <PostLikes postId={post._id} postLikes={post.likes} authenticatedUser={authenticatedUser} />
