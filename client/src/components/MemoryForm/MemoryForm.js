@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import './Form.css';
+import './MemoryForm.css';
 import { savePost, updatePost, setFormData, resetFormData } from '../../redux/posts';
 import Loader from '../Loader/Loader';
 import ImageInput from './ImageInput/ImageInput';
 
-export default function Form() {
+export default function MemoryForm() {
   const dispatch = useDispatch();
   
   const authUser = useSelector(state => state.auth.user);
