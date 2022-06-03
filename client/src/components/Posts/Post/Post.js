@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { setFormDataInEditMode, removePost } from '../../../redux/posts';
 import './Post.css';
 import PostTimeDifference from './PostTimeDifference/PostTimeDifference';
@@ -23,6 +24,8 @@ export default function Post({post}) {
     dispatch(removePost(post._id));
   }
 
+  const postLinkJsx = <Link className="post__link" to={`/posts/${post._id}`}></Link>;
+
   return (
     <div className="post">
       <div className="post__intro" style={postIntroStyle}>
@@ -31,6 +34,8 @@ export default function Post({post}) {
 
           <PostTimeDifference createdAt={post.createdAt} />
         </div>
+
+        {postLinkJsx}
 
         {isAuthor &&
           <div className="post__edit">
@@ -45,6 +50,8 @@ export default function Post({post}) {
         <h3>{post.title}</h3>
 
         <p className="post__description">{post.message}</p>
+
+        {postLinkJsx}
 
         <div className="post__actions">
           <PostLikes postId={post._id} postLikes={post.likes} authenticatedUser={authenticatedUser} />
