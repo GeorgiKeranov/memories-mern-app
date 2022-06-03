@@ -4,6 +4,12 @@
   gap: 3.5%;
 }
 
+.posts h1 {
+  width: 100%;
+  text-align: center;
+  font-size: 32px;
+}
+
 .posts .post {
   flex: 0 1 31%;
 }

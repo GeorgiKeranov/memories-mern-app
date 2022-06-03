@@ -23,7 +23,11 @@ export default function Posts() {
 
   return (
     <section className="posts grow-and-fade-in-animation">
-      {postElements}
+      {posts.length ? (
+        postElements
+      ) : (
+        <h1>There are no posts found!</h1>
+      )}
     </section>
   )
 }
