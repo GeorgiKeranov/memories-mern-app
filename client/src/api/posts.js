@@ -20,6 +20,16 @@ export const getPosts = async (page, thunkAPI) => {
   return response.data;
 }
 
+export const getPostById = async (id) => {
+  try {
+    const response = await axiosRequest.get(`/posts/${id}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
 export const savePost = async (postData, thunkAPI) => {
   const response = await axiosRequest.post('/posts', postData);
   
