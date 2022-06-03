@@ -5,6 +5,7 @@ import Header from './components/Header/Header';
 import Home from './components/Home/Home';
 import Register from './components/Register/Register';
 import Login from './components/Login/Login';
+import PostDetails from './components/PostDetails/PostDetails';
 
 function App() {
   const authenticatedUser = useSelector(state => state.auth.user);
@@ -20,6 +21,8 @@ function App() {
           <Route path="/register" element={!authenticatedUser ? <Register /> : <Navigate to="/" />}/>
 
           <Route path="/login" element={!authenticatedUser ? <Login /> : <Navigate to="/" />}/>
+
+          <Route path="/posts/:id" element={<PostDetails />}/>
         </Routes>
       </BrowserRouter>
     </div>
