@@ -40,6 +40,11 @@ export const getPostById = async (req, res) => {
 
     try {
         const post = await Post.findById(postId);
+
+        if (!post) {
+            return res.status(404).send({error: 'The post is not found!'});
+        }
+
         res.status(200).send(post);
     } catch (error) {
         res.status(400).send({error: error.message});
