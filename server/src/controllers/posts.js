@@ -35,6 +35,17 @@ export const getPosts = async (req, res) => {
     }
 }
 
+export const getPostById = async (req, res) => {
+    const postId = req.params.id;
+
+    try {
+        const post = await Post.findById(postId);
+        res.status(200).send(post);
+    } catch (error) {
+        res.status(400).send({error: error.message});
+    }
+}
+
 export const savePost = async (req, res) => {
     const postData = req.body;
     const authUser = req.authUser;
