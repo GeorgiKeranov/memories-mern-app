@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { getPostById } from '../../api/posts';
+import './PostDetails.css';
 import Main from '../Main/Main';
 import Loader from '../Loader/Loader';
+import PostTimeDifference from '../PostTimeDifference/PostTimeDifference';
 
 export default function PostDetails() {
+  const navigate = useNavigate();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
@@ -23,13 +26,35 @@ export default function PostDetails() {
     return <Loader />;
   }
 
+  if (!post) {
+   navigate('/');
+  }
+
   return (
     <Main>
-      {post ? (
-        <div>{post.title}</div>
-      ) : (
-        <h1>The post is not found, you can view all of the available posts on <Link to="/">this page</Link></h1>
-      )}
+      <section className="post-details">
+        <div className="post__content">
+          <div className="post__heading">
+            <h1>{post.title}</h1>
+
+            <PostTimeDifference createdAt={post.createdAt} />
+          </div>
+
+          <p className="post__tags">{post.tags.map(tag => `#${tag} `)}</p>
+
+          <div className="post__image-mobile">
+            <img src={post.image} alt={post.title} />
+          </div>
+
+          <p>{post.message}</p>
+
+          <h2>Created by: {post.author.firstName} {post.author.lastName}</h2>
+        </div>
+
+        <div className="post__image">
+          <img src={post.image} alt={post.title} />
+        </div>
+      </section>
     </Main>
   )
 }
