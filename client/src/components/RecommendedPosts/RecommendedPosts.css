@@ -1,0 +1,16 @@
+.recommended-posts {
+  margin-top: 30px;
+}
+
+.recommended-posts .recommended__heading h2 {
+  color: #3e50b5;
+}
+
+.recommended-posts .recommended__posts {
+  display: flex;
+  gap: 1%;
+}
+
+.recommended-posts .post {
+  flex: 0 1 24%;
+}
