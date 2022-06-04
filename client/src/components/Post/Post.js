@@ -5,7 +5,7 @@ import './Post.css';
 import PostTimeDifference from '../PostTimeDifference/PostTimeDifference';
 import PostLikes from './PostLikes/PostLikes';
 
-export default function Post({post}) {
+export default function Post({post, disableButtons}) {
   const dispatch = useDispatch();
   const authenticatedUser = useSelector(state => state.auth.user);
   
@@ -27,7 +27,7 @@ export default function Post({post}) {
   const postLinkJsx = <Link className="post__link" to={`/posts/${post._id}`}></Link>;
 
   return (
-    <div className="post">
+    <div className={`post${disableButtons ? ' post--no-buttons' : ''}`}>
       <div className="post__intro" style={postIntroStyle}>
         <div className="post__heading">
           <h4>{post.author.firstName} {post.author.lastName}</h4>
@@ -37,7 +37,7 @@ export default function Post({post}) {
 
         {postLinkJsx}
 
-        {isAuthor &&
+        {(!disableButtons && isAuthor) &&
           <div className="post__edit">
             <button className="btn-action btn-action--edit" onClick={handleEditPost}>EDIT</button>
           </div>
@@ -52,16 +52,18 @@ export default function Post({post}) {
         <p className="post__description">{post.message}</p>
 
         {postLinkJsx}
+        
+        {!disableButtons &&
+          <div className="post__actions">
+            <PostLikes postId={post._id} postLikes={post.likes} authenticatedUser={authenticatedUser} />
 
-        <div className="post__actions">
-          <PostLikes postId={post._id} postLikes={post.likes} authenticatedUser={authenticatedUser} />
-
-          {isAuthor &&
-            <div className="post__remove">
-              <button className="btn-action btn-action--remove" onClick={handlePostRemove}>REMOVE</button>
-            </div>
-          }
-        </div>
+            {isAuthor &&
+              <div className="post__remove">
+                <button className="btn-action btn-action--remove" onClick={handlePostRemove}>REMOVE</button>
+              </div>
+            }
+          </div>
+        }
       </div>
     </div>
   )

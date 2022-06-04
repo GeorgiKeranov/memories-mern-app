@@ -108,3 +108,7 @@
   margin: 1px 9px 0 0;
   color: #647dc8;
 }
+
+.post--no-buttons .post__details {
+  padding: 15px;
+}
