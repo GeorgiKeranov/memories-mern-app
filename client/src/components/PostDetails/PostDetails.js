@@ -5,6 +5,7 @@ import './PostDetails.css';
 import Main from '../Main/Main';
 import Loader from '../Loader/Loader';
 import PostTimeDifference from '../PostTimeDifference/PostTimeDifference';
+import RecommendedPosts from '../RecommendedPosts/RecommendedPosts';
 
 export default function PostDetails() {
   const navigate = useNavigate();
@@ -55,6 +56,8 @@ export default function PostDetails() {
           <img src={post.image} alt={post.title} />
         </div>
       </section>
+
+      <RecommendedPosts tags={post.tags} />
     </Main>
   )
 }
