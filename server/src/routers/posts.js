@@ -6,8 +6,8 @@ const router = Router();
 
 // GET
 router.get('/', getPosts);
-router.get('/:id', getPostById);
 router.get('/recommended', getRecommendedPosts);
+router.get('/:id', getPostById);
 
 // POST
 router.post('/', authMiddleware, savePost);
