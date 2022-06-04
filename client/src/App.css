@@ -186,12 +186,12 @@ img {
 }
 
 .btn-cancel {
-  background-color: #f70057;
-  border-color: #f70057;
+  background-color: #ec004a;
+  border-color: #ec004a;
 }
 
 .btn-cancel:hover {
-  color: #f70057;
+  color: #ec004a;
 }
 
 .btn-like {
@@ -236,6 +236,14 @@ img {
   color: #647dc8;
   background: transparent;
   opacity: .5;
+}
+
+.btn-action--remove {
+  color: #ec004a;
+}
+
+.btn-action--remove:hover {
+  color: #ec004a;
 }
 
 .btn-action--remove:before {
