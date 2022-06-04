@@ -7,8 +7,19 @@
     background-color: #fff;
 }
 
-.header .header__title a:hover:before {
+.header .header__logo a {
+    border: 4px solid #3e50b5;
+    display: block;
+    padding: 3px 3px 0px;
+    line-height: 1;
+}
+
+.header .header__logo a:hover:before {
     width: 0;
+}
+
+.header .header__logo a:hover {
+    opacity: .5;
 }
 
 .header .header__navigation {
@@ -46,9 +57,28 @@
     color: #3e50b5;
 }
 
+@media (max-width: 1000px) {
+    .header {
+        padding: 7px 20px;
+    }
+}
+
 @media (max-width: 540px) {
     .header h2 {
-        font-size: 28px;
+        font-size: 24px;
         line-height: 1.4;
+    }
+
+    .header .header__logo a {
+        border-width: 3px;
+        padding: 2px 2px 0;
+    }
+
+    .header .header__first-name-letter {
+        margin-right: 0;
+    }
+
+    .header .header__logged-user h3 {
+        display: none;
     }
 }

@@ -77,6 +77,14 @@
 
 .post .post__tags {
   color: #989898;
+  margin-bottom: 10px;
+}
+
+.post .post__details h3 {
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 23px;
+  color: #3e50b5
 }
 
 .post .post__description {
