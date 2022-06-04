@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setFormDataInEditMode, removePost } from '../../../redux/posts';
 import './Post.css';
-import PostTimeDifference from './PostTimeDifference/PostTimeDifference';
+import PostTimeDifference from '../../PostTimeDifference/PostTimeDifference';
 import PostLikes from './PostLikes/PostLikes';
 
 export default function Post({post}) {
