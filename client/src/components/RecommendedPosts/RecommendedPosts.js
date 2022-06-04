@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getRecommendedPosts } from '../../api/posts';
+import './RecommendedPosts.css';
 
 export default function RecommendedPosts({tags}) {
   const [posts, setPosts] = useState([]);
@@ -22,7 +23,7 @@ export default function RecommendedPosts({tags}) {
   })
 
   return (
-    <section className="recommended-posts">
+    <section className="recommended-posts grow-and-fade-in-animation">
       {postsJsx}
     </section>
   )
