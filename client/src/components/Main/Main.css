@@ -1,42 +1,45 @@
 .main {
   padding: 30px 20px;
+}
+
+.main--columns {
   display: flex;
   justify-content: space-between;
 }
 
-.main .main__content {
+.main--columns .main__content {
   flex: 0 1 70%;
 }
 
-.main .main__sidebar {
+.main--columns .main__sidebar {
   flex: 0 1 28%;
 }
 
-.main .main__sidebar > div + div {
+.main--columns .main__sidebar > div + div {
   margin-top: 40px;
 }
 
 @media (max-width: 1200px) {
-  .main .main__content {
+  .main--columns .main__content {
     flex-basis: 60%;
   }
 
-  .main .main__sidebar {
+  .main--columns .main__sidebar {
     flex-basis: 37%;
   }
 }
 
 @media (max-width: 900px) {
-  .main {
+  .main--columns {
     flex-wrap: wrap;
   }
 
-  .main .main__content,
-  .main .main__sidebar {
+  .main--columns .main__content,
+  .main--columns .main__sidebar {
     flex-basis: 100%;
   }
 
-  .main .main__sidebar {
+  .main--columns .main__sidebar {
     order: -1;
     margin-bottom: 50px;
   }

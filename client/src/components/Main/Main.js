@@ -1,8 +1,8 @@
 import './Main.css';
 
-export default function Main({ children }) {
+export default function Main({ columns, children }) {
   return (
-    <main className="main">
+    <main className={`main${columns ? ' main--columns' : ''}`}>
       {children}
     </main>
   )

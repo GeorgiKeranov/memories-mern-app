@@ -8,7 +8,7 @@ import Pagination from '../Pagination/Pagination';
 
 export default function Home() {
   return (
-    <Main>
+    <Main columns={true}>
       <MainContent>
         <Posts />
       </MainContent>
