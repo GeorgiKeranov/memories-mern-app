@@ -57,7 +57,7 @@ export default function PostDetails() {
         </div>
       </section>
 
-      <RecommendedPosts tags={post.tags} />
+      <RecommendedPosts excludedPostId={post._id} tags={post.tags} />
     </Main>
   )
 }

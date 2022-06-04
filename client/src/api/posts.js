@@ -20,10 +20,12 @@ export const getPosts = async (page, thunkAPI) => {
   return response.data;
 }
 
-export const getRecommendedPosts = async (tags) => {
+export const getRecommendedPosts = async ({excludedPostId, tags}) => {
   try {
     tags = tags.join(';');
-    const response = await axiosRequest.get('/posts/recommended', {params: {tags}});
+
+    const response = await axiosRequest.get('/posts/recommended', {params: {excludedPostId, tags}});
+
     return response.data;
   } catch (error) {
     console.log(error);
