@@ -54,6 +54,10 @@ export const getPostById = async (req, res) => {
 export const getRecommendedPosts = async (req, res) => {
     let search = {};
 
+    if (req.query.excludedPostId) {
+        search._id = {$ne: req.query.excludedPostId};
+    }
+
     if (req.query.tags) {
         let tagsArray = req.query.tags.split(';');
         search.tags = {$in: tagsArray};
