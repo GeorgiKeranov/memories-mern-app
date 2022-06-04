@@ -14,8 +14,8 @@ export default function Header() {
 
   return (
     <header className="header">
-      <div className="header__title">
-        <h2><Link to="/">MEMORIES</Link></h2>
+      <div className="header__logo">
+        <h2><Link to="/">M</Link></h2>
       </div>
 
       <div className="header__navigation">
@@ -29,10 +29,6 @@ export default function Header() {
 
         <nav>
           <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-
             {user ? (
               <li>
                 <button className="btn-cancel" onClick={logout}>Logout</button>
