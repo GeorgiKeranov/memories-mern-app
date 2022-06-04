@@ -15,7 +15,7 @@ export const getPosts = async (req, res) => {
 
     if (req.query.tags) {
         let tagsArray = req.query.tags.split(';');
-        search.tags = {$all: tagsArray};
+        search.tags = {$in: tagsArray};
     }
 
     try {
