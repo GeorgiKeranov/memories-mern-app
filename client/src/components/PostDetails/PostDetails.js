@@ -32,7 +32,7 @@ export default function PostDetails() {
 
   return (
     <Main>
-      <section className="post-details">
+      <section className="post-details grow-and-fade-in-animation">
         <div className="post__content">
           <div className="post__heading">
             <h1>{post.title}</h1>
