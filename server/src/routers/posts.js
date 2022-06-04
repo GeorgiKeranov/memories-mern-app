@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getPosts, getPostById, savePost, updatePost, removePost, likePost } from '../controllers/posts.js';
+import { getPosts, getPostById, getRecommendedPosts, savePost, updatePost, removePost, likePost } from '../controllers/posts.js';
 import authMiddleware from '../middleware/auth.js';
 
 const router = Router();
@@ -7,6 +7,7 @@ const router = Router();
 // GET
 router.get('/', getPosts);
 router.get('/:id', getPostById);
+router.get('/recommended', getRecommendedPosts);
 
 // POST
 router.post('/', authMiddleware, savePost);

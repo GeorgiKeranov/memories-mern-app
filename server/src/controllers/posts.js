@@ -51,6 +51,27 @@ export const getPostById = async (req, res) => {
     }
 }
 
+export const getRecommendedPosts = async (req, res) => {
+    let search = {};
+
+    if (req.query.tags) {
+        let tagsArray = req.query.tags.split(';');
+        search.tags = {$in: tagsArray};
+    }
+
+    try {
+        const posts = await Post
+            .find(search)
+            .limit(4)
+            .sort('-createdAt')
+            .populate('author');
+
+        res.status(200).send(posts);
+    } catch (error) {
+        res.status(400).send({error: error.message});
+    }
+}
+
 export const savePost = async (req, res) => {
     const postData = req.body;
     const authUser = req.authUser;
