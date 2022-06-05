@@ -77,7 +77,7 @@ export const getRecommendedPosts = async (req, res) => {
 }
 
 export const savePost = async (req, res) => {
-    const postData = req.body;
+    const postData = removeNotEditableFieldsByAuthor(req.body);
     const authUser = req.authUser;
 
     try {
@@ -93,7 +93,7 @@ export const savePost = async (req, res) => {
 
 export const updatePost = async (req, res) => {
     const postId = req.params.id;
-    const postData = req.body;
+    const postData = removeNotEditableFieldsByAuthor(req.body);
 
     try {
         let post = await Post.findById(postId);
@@ -172,3 +172,15 @@ export const likePost = async (req, res) => {
     }
 }
 
+// Remove fields that an author of post can't save or update
+function removeNotEditableFieldsByAuthor(fields) {
+    const disabledFields = ['likes', 'comments', 'createdAt'];
+
+    for (const disabledField of disabledFields) {
+        if (fields[disabledField]) {
+            delete fields[disabledField];
+        }
+    }
+
+    return fields;
+}
