@@ -11,7 +11,7 @@ export const registerUser = async (req, res) => {
 
     res.status(200).send({user, token});
   } catch (error) {
-    res.status(400).send({error: error.message});
+    res.status(500).send({error: error.message});
   }
 }
 
@@ -40,6 +40,6 @@ export const loginUser = async (req, res) => {
 
     res.status(200).send({user, token});
   } catch (error) {
-    res.status(400).send({error: error.message});
+    res.status(500).send({error: error.message});
   }
 }
