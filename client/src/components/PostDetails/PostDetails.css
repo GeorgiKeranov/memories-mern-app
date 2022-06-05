@@ -12,6 +12,10 @@
   padding-bottom: 40px;
 }
 
+.post-details .post__content--full-width {
+  flex: 0 1 100%;
+}
+
 .post-details .post__image-mobile {
   display: none;
   margin: 30px 0;
@@ -69,6 +73,10 @@
 @media (max-width: 1400px) {
   .post-details .post__content {
     flex-basis: 47%;
+  }
+
+  .post-details .post__content--full-width {
+    flex-basis: 100%;
   }
 
   .post-details .post__image {

@@ -34,7 +34,7 @@ export default function PostDetails() {
   return (
     <Main>
       <section className="post-details grow-and-fade-in-animation">
-        <div className="post__content">
+        <div className={`post__content${!post.image ? ' post__content--full-width' : ''}`}>
           <div className="post__heading">
             <h1>{post.title}</h1>
 
@@ -43,18 +43,22 @@ export default function PostDetails() {
 
           <p className="post__tags">{post.tags.map(tag => `#${tag} `)}</p>
 
-          <div className="post__image-mobile">
-            <img src={post.image} alt={post.title} />
-          </div>
+          {post.image &&
+            <div className="post__image-mobile">
+              <img src={post.image} alt={post.title} />
+            </div>
+          }
 
           <p>{post.message}</p>
 
           <h2>Created by: {post.author.firstName} {post.author.lastName}</h2>
         </div>
-
-        <div className="post__image">
-          <img src={post.image} alt={post.title} />
-        </div>
+      
+        {post.image &&
+          <div className="post__image">
+            <img src={post.image} alt={post.title} />
+          </div>
+        }
       </section>
 
       <RecommendedPosts excludedPostId={post._id} tags={post.tags} />
