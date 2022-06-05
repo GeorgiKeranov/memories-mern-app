@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getPosts, getPostById, getRecommendedPosts, savePost, updatePost, removePost, likePost } from '../controllers/posts.js';
+import { getPosts, getPostById, getRecommendedPosts, savePost, saveCommentOnPost, updatePost, removePost, likePost } from '../controllers/posts.js';
 import authMiddleware from '../middleware/auth.js';
 
 const router = Router();
@@ -11,6 +11,7 @@ router.get('/:id', getPostById);
 
 // POST
 router.post('/', authMiddleware, savePost);
+router.post('/:id/comment', authMiddleware, saveCommentOnPost);
 
 // PATCH
 router.patch('/:id', authMiddleware, updatePost);

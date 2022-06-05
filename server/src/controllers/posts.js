@@ -31,7 +31,7 @@ export const getPosts = async (req, res) => {
 
         res.status(200).send({posts, currentPage: page, numberOfPages });
     } catch (error) {
-        res.status(400).send({error: error.message});
+        res.status(500).send({error: error.message});
     }
 }
 
@@ -39,7 +39,7 @@ export const getPostById = async (req, res) => {
     const postId = req.params.id;
 
     try {
-        const post = await Post.findById(postId).populate('author');
+        const post = await Post.findById(postId).populate('author comments.author');
 
         if (!post) {
             return res.status(404).send({error: 'The post is not found!'});
@@ -47,7 +47,7 @@ export const getPostById = async (req, res) => {
 
         res.status(200).send(post);
     } catch (error) {
-        res.status(400).send({error: error.message});
+        res.status(500).send({error: error.message});
     }
 }
 
@@ -72,7 +72,7 @@ export const getRecommendedPosts = async (req, res) => {
 
         res.status(200).send(posts);
     } catch (error) {
-        res.status(400).send({error: error.message});
+        res.status(500).send({error: error.message});
     }
 }
 
@@ -87,7 +87,29 @@ export const savePost = async (req, res) => {
         
         res.status(200).send(postSaved);
     } catch (error) {
-        res.status(400).send({error: error.message});
+        res.status(500).send({error: error.message});
+    }
+}
+
+export const saveCommentOnPost = async(req, res) => {
+    const postId = req.params.id;
+    const comment = req.body.comment;
+    const authUser = req.authUser;
+
+    try {
+        const post = await Post.findByIdAndUpdate(postId, {$push: {
+            comments: {comment, author: authUser._id}
+        }}, {new: true});
+
+        if (!post) {
+            return res.status(404).send({error: 'The post is not existing!'});
+        }
+
+        await post.populate('comments.author');
+
+        res.status(200).send(post);
+    } catch (error) {
+        res.status(500).send({error: error.message});
     }
 }
 
@@ -117,32 +139,7 @@ export const updatePost = async (req, res) => {
 
         res.status(200).send(post);
     } catch (error) {
-        res.status(400).send({error: error.message});
-    }
-}
-
-export const removePost = async (req, res) => {
-    const postId = req.params.id;
-
-    try {
-        const post = await Post.findById(postId);
-        
-        if (!post) {
-            return res.status(404).send({error: 'The post is not existing!'});
-        }
-
-        const authUser = req.authUser;
-        const authUserId = authUser._id.toString();
-
-        if (post.author.toString() !== authUserId) {
-            return res.status(401).send({error: 'You are not the author of the post!'});
-        }
-
-        await post.remove();
-
-        res.status(200).send(post);
-    } catch (error) {
-        res.status(400).send({error: error.message});
+        res.status(500).send({error: error.message});
     }
 }
 
@@ -168,13 +165,38 @@ export const likePost = async (req, res) => {
 
         res.status(200).send(post);
     } catch (error) {
-        res.status(400).send({error: error.message});
+        res.status(500).send({error: error.message});
+    }
+}
+
+export const removePost = async (req, res) => {
+    const postId = req.params.id;
+
+    try {
+        const post = await Post.findById(postId);
+        
+        if (!post) {
+            return res.status(404).send({error: 'The post is not existing!'});
+        }
+
+        const authUser = req.authUser;
+        const authUserId = authUser._id.toString();
+
+        if (post.author.toString() !== authUserId) {
+            return res.status(401).send({error: 'You are not the author of the post!'});
+        }
+
+        await post.remove();
+
+        res.status(200).send(post);
+    } catch (error) {
+        res.status(500).send({error: error.message});
     }
 }
 
 // Remove fields that an author of post can't save or update
 function removeNotEditableFieldsByAuthor(fields) {
-    const disabledFields = ['likes', 'comments', 'createdAt'];
+    const disabledFields = ['likes', 'comments', 'createdAt', 'author'];
 
     for (const disabledField of disabledFields) {
         if (fields[disabledField]) {
