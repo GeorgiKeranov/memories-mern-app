@@ -73,6 +73,16 @@ export const removePost = async (postId, thunkAPI) => {
   return response.data;
 }
 
+export const removePostComment = async ({postId, commentId}) => {
+  try {
+    const response = await axiosRequest.delete(`/posts/${postId}/comment/${commentId}`);  
+    return response.data.comments;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
 export const likePost = async (id) => {
   const response = await axiosRequest.patch(`/posts/${id}/like`);
   return response.data;

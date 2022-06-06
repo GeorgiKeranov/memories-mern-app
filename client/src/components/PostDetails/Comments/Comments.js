@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import './Comments.css';
-import { commentOnPost } from '../../../api/posts';
+import { commentOnPost, removePostComment } from '../../../api/posts';
 import Loader from '../../Loader/Loader';
 
 export default function Comments({postId, initialComments}) {
@@ -12,7 +12,7 @@ export default function Comments({postId, initialComments}) {
 
   useEffect(() => {
     setComments(initialComments);
-  }, [postId])
+  }, [postId, initialComments]);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -33,6 +33,18 @@ export default function Comments({postId, initialComments}) {
     setIsLoading(false);
   }
 
+  async function removeComment(commentId) {
+    setIsLoading(true);
+
+    const commentsData = await removePostComment({postId, commentId});
+
+    if (commentsData) {
+      setComments(commentsData);
+    }
+
+    setIsLoading(false);
+  }
+
   if (isLoading) {
     return <Loader />
   }
@@ -45,7 +57,13 @@ export default function Comments({postId, initialComments}) {
       </div>
 
       <div className="comment__content">
-        <h4>{comment.author.firstName} {comment.author.lastName}</h4>
+        <div className="comment__actions">
+          <h4>{comment.author.firstName} {comment.author.lastName}</h4>
+
+          {authenticatedUser._id === comment.author._id &&
+            <button className="btn-action btn-action--remove" onClick={() => removeComment(comment._id)}></button>
+          }
+        </div>
 
         <p>{comment.comment}</p>
       </div>
