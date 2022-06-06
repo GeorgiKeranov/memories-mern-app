@@ -47,6 +47,7 @@
 }
 
 .header .header__logged-user h3 {
+    font-weight: 400;
     margin-bottom: 0;
 }
 
