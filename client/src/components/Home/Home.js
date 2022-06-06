@@ -11,6 +11,8 @@ export default function Home() {
     <Main columns={true}>
       <MainContent>
         <Posts />
+
+        <Pagination mobile={true} />
       </MainContent>
 
       <MainSidebar>

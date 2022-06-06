@@ -42,5 +42,16 @@
   .main--columns .main__sidebar {
     order: -1;
     margin-bottom: 50px;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .main--columns .main__sidebar .pagination {
+    display: none;
+  }
+
+  .main--columns .main__sidebar > div + div {
+    margin-top: 0;
+    margin-bottom: 40px;
   }
 }

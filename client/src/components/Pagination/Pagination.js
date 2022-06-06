@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getPosts } from '../../redux/posts';
 import './Pagination.css';
 
-export default function Pagination() {
+export default function Pagination({mobile}) {
   const dispatch = useDispatch();
 
   const [currentPage, numberOfPages, arePostsLoading] = useSelector(state => {
@@ -61,7 +61,7 @@ export default function Pagination() {
   const lastVisiblePage = visiblePages[visiblePages.length - 1];
 
   return (
-    <div className="pagination grow-and-fade-in-animation">
+    <div className={`pagination${mobile ? ' pagination--mobile' : ''} grow-and-fade-in-animation`}>
       <ul>
         <li><button disabled={currentPage === 1 ? 'disabled' : ''} onClick={prevPage}>{'⮜'}</button></li>
 

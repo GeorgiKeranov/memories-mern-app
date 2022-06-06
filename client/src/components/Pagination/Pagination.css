@@ -49,3 +49,13 @@
   background-color: #fff;
   color: rgba(0, 0, 0, 0.23);
 }
+
+.pagination--mobile {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .pagination--mobile {
+    display: block;
+  }
+}
