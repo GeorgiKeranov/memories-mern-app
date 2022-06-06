@@ -23,9 +23,7 @@ export const getPosts = async (page, thunkAPI) => {
 export const getRecommendedPosts = async ({excludedPostId, tags}) => {
   try {
     tags = tags.join(';');
-
     const response = await axiosRequest.get('/posts/recommended', {params: {excludedPostId, tags}});
-
     return response.data;
   } catch (error) {
     console.log(error);
@@ -50,6 +48,16 @@ export const savePost = async (postData, thunkAPI) => {
   thunkAPI.dispatch(postsSlice.getPosts());
   
   return response.data;
+}
+
+export const commentOnPost = async ({postId, comment}) => {
+  try {
+    const response = await axiosRequest.post(`/posts/${postId}/comment`, {comment});
+    return response.data.comments;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
 }
 
 export const updatePost = async ({postId, postData}) => {
