@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getPosts, getPostById, getRecommendedPosts, savePost, saveCommentOnPost, updatePost, removePost, likePost } from '../controllers/posts.js';
+import { getPosts, getPostById, getRecommendedPosts, savePost, saveCommentOnPost, updatePost, removePost, removePostComment, likePost } from '../controllers/posts.js';
 import authMiddleware from '../middleware/auth.js';
 
 const router = Router();
@@ -19,5 +19,6 @@ router.patch('/:id/like', authMiddleware, likePost);
 
 // DELETE
 router.delete('/:id', authMiddleware, removePost);
+router.delete('/:id/comment/:commentId', authMiddleware, removePostComment);
 
 export default router;

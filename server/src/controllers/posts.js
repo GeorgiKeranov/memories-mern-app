@@ -194,6 +194,37 @@ export const removePost = async (req, res) => {
     }
 }
 
+export const removePostComment = async (req, res) => {
+    const postId = req.params.id;
+    const commentId = req.params.commentId;
+
+    try {
+        const post = await Post.findOne({_id: postId, 'comment._id': commentId}).populate('comments.author');
+        
+        if (!post) {
+            return res.status(404).send({error: 'The post or comment is not existing!'});
+        }
+
+        const commentIndex = post.comments.findIndex(comment => comment._id.toString() === commentId);
+        const commentAuthorId = post.comments[commentIndex].author._id.toString();
+
+        const authUser = req.authUser;
+        const authUserId = authUser._id.toString();
+
+        if (commentAuthorId !== authUserId) {
+            return res.status(401).send({error: 'You are not the author of the comment!'});
+        }
+
+        post.comments.splice(commentIndex, 1);
+
+        await post.save();
+
+        res.status(200).send(post);
+    } catch (error) {
+        res.status(500).send({error: error.message});
+    }
+}
+
 // Remove fields that an author of post can't save or update
 function removeNotEditableFieldsByAuthor(fields) {
     const disabledFields = ['likes', 'comments', 'createdAt', 'author'];
