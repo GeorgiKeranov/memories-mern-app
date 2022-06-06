@@ -52,7 +52,7 @@ export default function PostDetails() {
 
           <p>{post.message}</p>
 
-          <Comments initialComments={post.comments} />
+          <Comments postId={post._id} initialComments={post.comments} />
 
           <h2>Created by: {post.author.firstName} {post.author.lastName}</h2>
         </div>

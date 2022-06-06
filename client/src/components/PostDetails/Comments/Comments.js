@@ -1,16 +1,45 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import './Comments.css';
+import { commentOnPost } from '../../../api/posts';
+import Loader from '../../Loader/Loader';
 
-export default function Comments({initialComments}) {
-  const user = useSelector(state => state.auth.user);
+export default function Comments({postId, initialComments}) {
+  const authenticatedUser = useSelector(state => state.auth.user);
   const [comments, setComments] = useState(initialComments);
   const [isLoading, setIsLoading] = useState(false);
   const [comment, setComment] = useState('');
 
-  const commentsJsx = comments.map((comment, index) => {
+  useEffect(() => {
+    setComments(initialComments);
+  }, [postId])
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    if (!comment) {
+      return;
+    }
+    
+    setIsLoading(true);
+    
+    const newComments = await commentOnPost({postId, comment});
+
+    if (newComments) {
+      setComments(newComments);
+      setComment('');
+    }
+
+    setIsLoading(false);
+  }
+
+  if (isLoading) {
+    return <Loader />
+  }
+
+  const commentsJsx = comments.map(comment => {
     return (
-    <div className="comment" key={index}>
+    <div className="comment" key={comment._id}>
       <div className="comment__image">
         <div className="comment__first-letter">{comment.author.firstName[0]}</div>
       </div>
@@ -24,22 +53,18 @@ export default function Comments({initialComments}) {
     );
   });
 
-  function handleSubmit(event) {
-    event.preventDefault();
-  }
-
   return (
     <div className="comments">
       {commentsJsx}
 
-      {user &&
+      {authenticatedUser &&
         <form className="comment-form" onSubmit={handleSubmit}>
           <div className="comment__image">
-            <div className="comment__first-letter">{user.firstName[0]}</div>
+            <div className="comment__first-letter">{authenticatedUser.firstName[0]}</div>
           </div>
 
           <div className="comment__actions">
-            <input type="text" name="comment" placeholder="Type a comment" value={comment} />
+            <input type="text" name="comment" placeholder="Type a comment" onChange={(e) => setComment(e.target.value)} value={comment} />
 
             <button className="btn" type="submit">Comment</button>
           </div>
