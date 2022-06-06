@@ -20,6 +20,10 @@ export default function RecommendedPosts({excludedPostId, tags}) {
     getPosts();
   }, [excludedPostId, tags]);
 
+  if (!posts.length) {
+    return <></>;
+  }
+
   const postsJsx = posts.map(post => {
     return (
       <Post key={post._id} post={post} disableButtons={true} />
