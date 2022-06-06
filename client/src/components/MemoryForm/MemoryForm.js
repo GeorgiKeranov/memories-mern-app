@@ -15,6 +15,12 @@ export default function MemoryForm() {
   ]);
 
   useEffect(() => {
+    return () => {
+      dispatch(resetFormData());
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
     if (!authUser) {
       dispatch(resetFormData());
     }
