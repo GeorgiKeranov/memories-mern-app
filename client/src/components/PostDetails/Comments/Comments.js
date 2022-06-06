@@ -60,7 +60,7 @@ export default function Comments({postId, initialComments}) {
         <div className="comment__actions">
           <h4>{comment.author.firstName} {comment.author.lastName}</h4>
 
-          {authenticatedUser._id === comment.author._id &&
+          {(authenticatedUser && authenticatedUser._id === comment.author._id) &&
             <button className="btn-action btn-action--remove" onClick={() => removeComment(comment._id)}></button>
           }
         </div>
