@@ -6,6 +6,7 @@ import Main from '../Main/Main';
 import Loader from '../Loader/Loader';
 import PostTimeDifference from '../PostTimeDifference/PostTimeDifference';
 import RecommendedPosts from '../RecommendedPosts/RecommendedPosts';
+import Comments from './Comments/Comments';
 
 export default function PostDetails() {
   const navigate = useNavigate();
@@ -50,6 +51,8 @@ export default function PostDetails() {
           }
 
           <p>{post.message}</p>
+
+          <Comments initialComments={post.comments} />
 
           <h2>Created by: {post.author.firstName} {post.author.lastName}</h2>
         </div>
