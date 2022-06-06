@@ -112,3 +112,9 @@
 .post--no-buttons .post__details {
   padding: 15px;
 }
+
+@media (max-width: 400px) {
+  .post .post__details h3 {
+    font-size: 20px;
+  }
+}
