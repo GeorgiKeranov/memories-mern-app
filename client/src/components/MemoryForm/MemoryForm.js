@@ -49,6 +49,18 @@ export default function MemoryForm() {
   function handleSubmit(event) {
     event.preventDefault();
 
+    let areAllFieldsEmpty = true;
+    for (const property in formData) {
+      if (formData[property]) {
+        areAllFieldsEmpty = false;
+        break;
+      }
+    }
+
+    if (areAllFieldsEmpty) {
+      return;
+    }
+
     if (isFormInEditMode) {
       return dispatch(updatePost({postId: formData._id, postData: formData}));
     }
