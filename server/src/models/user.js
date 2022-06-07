@@ -21,8 +21,7 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true,
         minLength: 8
-    },
-    image: String
+    }
 });
 
 // Hash plain password before save or updateto the database
