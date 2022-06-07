@@ -23,6 +23,8 @@ function App() {
           <Route path="/login" element={!authenticatedUser ? <Login /> : <Navigate to="/" />}/>
 
           <Route path="/posts/:id" element={<PostDetails />}/>
+          
+          <Route path="*" element={<Navigate to="/" />}/>
         </Routes>
       </BrowserRouter>
     </div>
