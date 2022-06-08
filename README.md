@@ -1,5 +1,5 @@
-# Memories Mern App
-Memories is social web application that have users and they can create post. The posts can be commented or liked by other users.
+# Memories MERN App
+Memories is a social web application that has users who can create posts. The posts can be commented on or liked by other users. It is built with Node.JS, React, Express and MongoDB
 
 ## [Preview the live application](https://gkeranov-memories-app.netlify.app/)
 [You can check the live application from here - https://gkeranov-memories-app.netlify.app/](https://gkeranov-memories-app.netlify.app/).
