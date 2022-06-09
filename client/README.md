@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+# Client
+This is the front-end of the application that communicates with the REST API from [Server side](../server).  
+  
+[You can preview the live application from https://gkeranov-memories-app.netlify.app/.](https://gkeranov-memories-app.netlify.app/)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of Contents
+- [Technologies Used](#technologies-used)
+- [Functionalities](#functionalities)
+- [How to Install](#how-to-install)
+- [Images](#images)
 
-## Available Scripts
+## Technologies Used
+- JavaScript
+- React
+- Redux Toolkit - used for state managment and less boilerplate code using Redux
+- React Router Dom - used for dynamic routing in the app
+- Axios - used for easier communication with HTTP
+- HTML
+- CSS
 
-In the project directory, you can run:
+## Functionalities
+1. Everyone can:
+- View posts, comments and likes made by other users.
+- Search by title or tags for posts.
+- View recommended posts on every page based on the currently viewed post.
+- View other pages of posts.
+- Register as a user and login.
+2. Users can:
+- View, post, edit or remove their posts which is happening on a single page.
+- Like or remove already liked posts.
+- Comment on posts or remove their comments from posts.
 
-### `npm start`
+## How to Install
+Before installation make sure that you have installed [Node.JS](https://nodejs.org/en/) and [NPM](https://www.npmjs.com/).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Download the project locally.
+2. Open the ```/client``` folder.
+3. Copy ```.env.example``` file and paste it in the same directory renaming it as a ```.env```.
+4. Open ```.env``` file and type the value for ```REACT_APP_API_URL```. This is the url for the server side API. For example if you run the server side with the default settings you can type this in your ```.env``` file ```REACT_APP_API_URL=http://localhost:5000```
+5. Open the ```/client``` folder with the terminal.
+6. Type ```npm install``` in the terminal and wait to install all of the packages.
+7. Type ```npm start``` in the terminal and wait until it says ```webpack compiled successfully```.
+8. You can view the application at ```http://localhost:3000```.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Images
+![gkeranov-memories-app netlify app_](https://user-images.githubusercontent.com/22518317/172440923-214a51fd-eb21-4c1e-8553-75160a99807d.png)  
+  
+---  
+  
+![gkeranov-memories-app netlify app_posts_629f7217efcd39552dfc4351](https://user-images.githubusercontent.com/22518317/172440986-2b0b31a8-194b-4b3e-8b04-ca59037e7213.png)  
+  
+---  
+  
+![gkeranov-memories-app netlify app_posts_629f7217efcd39552dfc4351 (1)](https://user-images.githubusercontent.com/22518317/172441005-ff4a0121-d5d3-4760-bea3-5277afbf13d5.png)  
+  
+---  
+  
+![gkeranov-memories-app netlify app_posts_629f7217efcd39552dfc4351 (2)](https://user-images.githubusercontent.com/22518317/172441053-5a039b8b-d53f-470e-bfe1-7c594f3c8226.png)  
