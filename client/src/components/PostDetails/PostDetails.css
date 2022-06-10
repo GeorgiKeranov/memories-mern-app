@@ -33,6 +33,7 @@
 .post-details .post__image img {
   max-width: 100%;
   border-radius: 20px;
+  margin-left: auto;
 }
 
 .post-details .post__heading {
