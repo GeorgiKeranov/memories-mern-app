@@ -14,7 +14,7 @@ export const getPosts = async (req, res) => {
     }
 
     if (req.query.tags) {
-        let tagsArray = req.query.tags.split(';');
+        let tagsArray = req.query.tags.split(';').map(tag => new RegExp(tag, 'i'));
         search.tags = {$in: tagsArray};
     }
 
@@ -29,7 +29,7 @@ export const getPosts = async (req, res) => {
             .sort('-createdAt')
             .populate('author');
 
-        res.status(200).send({posts, currentPage: page, numberOfPages });
+        res.status(200).send({posts, currentPage: page, numberOfPages});
     } catch (error) {
         res.status(500).send({error: error.message});
     }
