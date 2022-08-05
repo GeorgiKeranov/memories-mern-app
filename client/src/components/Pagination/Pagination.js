@@ -63,7 +63,7 @@ export default function Pagination({mobile}) {
   return (
     <div className={`pagination${mobile ? ' pagination--mobile' : ''} grow-and-fade-in-animation`}>
       <ul>
-        <li><button disabled={currentPage === 1 ? 'disabled' : ''} onClick={prevPage}>{'⮜'}</button></li>
+        <li><button disabled={currentPage === 1 ? 'disabled' : ''} onClick={prevPage}>{'❮'}</button></li>
 
         {/* Render first page with dots if it is not in the visible pages */
         firstPage !== firstVisiblePage &&
@@ -85,7 +85,7 @@ export default function Pagination({mobile}) {
           </>
         }
 
-        <li><button disabled={currentPage === lastVisiblePage ? 'disabled' : ''} onClick={nextPage}>{'⮞'}</button></li>
+        <li><button disabled={currentPage === lastVisiblePage ? 'disabled' : ''} onClick={nextPage}>{'❯'}</button></li>
       </ul>
     </div>
   )
